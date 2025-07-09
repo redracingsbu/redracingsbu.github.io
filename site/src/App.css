@@ -1,0 +1,45 @@
+.main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  flex-grow: 1;
+}
+
+footer {
+  margin-top: auto;
+  width: 100%;
+  font-family: 'Courier New', Courier, monospace;
+  text-align: center;
+}
+
+.carContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100vw;
+  overflow: hidden;
+  flex-grow: 1;
+  margin-top: -8vh;
+}
+
+.carImg {
+  height: 75vh;
+  object-fit: contain;
+}
+
+@media screen and (min-width: 1024px) and (min-aspect-ratio: 4/3) {
+  #root {
+    padding: 2rem;
+  }
+  
+  .carContainer {
+    margin-top: -5vh;
+    height: 60vh;
+  }
+
+  .carImg {
+    transform: rotate(90deg);
+    height: 90dvh;
+  }
+}
