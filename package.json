@@ -1,5 +1,6 @@
 {
   "name": "site",
+  "homepage": "https://sburedracing.github.io/",
   "private": true,
   "version": "0.0.0",
   "type": "module",
