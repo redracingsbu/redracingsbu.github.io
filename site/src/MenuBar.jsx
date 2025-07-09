@@ -1,6 +1,9 @@
-import './menubar.css'
+import Discord from './Discord.jsx';
+import Instagram from './Instagram.jsx';
+import LinkedIn from './LinkedIn.jsx';
+import './menubar.css';
 
-function MenuBar(){
+function MenuBar({ menuOpen }) {
     return (
         <>
             <div className={`links ${menuOpen ? 'open' : ''}`}>
@@ -17,7 +20,7 @@ function MenuBar(){
                 </div>
             </div>
         </>
-    )
+    );
 }
 
-export default MenuBar
+export default MenuBar;
