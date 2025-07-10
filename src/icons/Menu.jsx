@@ -1,5 +1,3 @@
-import React from 'react';
-
 const Menu = ({ className }) => (
   <svg
     className={className}

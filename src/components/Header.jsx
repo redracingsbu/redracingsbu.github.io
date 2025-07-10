@@ -1,6 +1,6 @@
 import './header.css';
-import Menu from './Menu.jsx';
-import Logo from './Logo.jsx'
+import Menu from '../icons/Menu.jsx';
+import Logo from '../icons/Logo.jsx'
 
 function Header({ onMenuToggle }) {
   return (
