@@ -5,16 +5,21 @@ import Home from './pages/Home.jsx';
 import About from './pages/About.jsx';
 import Join from './pages/Join.jsx';
 import Sponsors from './pages/Sponsors.jsx';
-import { useState } from 'react';
-import { Routes, Route, Navigate } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { Routes, Route, Navigate, useLocation } from 'react-router-dom';
 
 
 function App() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const location = useLocation();
 
   const handleMenuToggle = () => {
     setMenuOpen(!menuOpen);
   };
+
+  useEffect(() => {
+    setMenuOpen(false);
+  }, [location]);
 
   return (
       <div className="main">
