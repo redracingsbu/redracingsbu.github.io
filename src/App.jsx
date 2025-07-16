@@ -9,7 +9,7 @@ import ContactUs from './pages/ContactUs.jsx';
 
 function App() {
   return (
-    <div className="main min-h-screen flex flex-col w-full">
+    <div className="main min-h-screen flex flex-col w-full bg-white text-gray-900 dark:bg-[#191919] dark:text-white">
       <Header />
       <main className="flex-1">
         <Routes>
@@ -23,7 +23,7 @@ function App() {
         </Routes>
       </main>
       <footer
-        className="w-full text-center pb-2 font-normal"
+        className="w-full text-center pb-2 font-normal text-gray-900 dark:text-white"
         style={{ fontFamily: '"Courier New", Courier, monospace'}}
       >
         Formula SAE at Stony Brook University

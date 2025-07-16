@@ -7,7 +7,6 @@ function ContactUs() {
     const [formData, setFormData] = useState({
         firstName: '',
         lastName: '',
-        email: '',
         topic: '',
         message: ''
     });
@@ -44,8 +43,6 @@ function ContactUs() {
         
         if (!value || value.trim() === '') {
             error = 'This field is required';
-        } else if (name === 'email' && !/\S+@\S+\.\S+/.test(value)) {
-            error = 'Please enter a valid email address';
         }
         
         setErrors(prev => ({
@@ -72,37 +69,46 @@ function ContactUs() {
         setTouched(allTouched);
         
         if (Object.keys(newErrors).length === 0) {
-            console.log('Form submitted:', formData);
+            // Create mailto link
+            const subject = encodeURIComponent(formData.topic);
+            const body = encodeURIComponent(
+                `Dear Sbu Red Racing Team,\n\n${formData.message}\n\nsincerely,\n${formData.firstName} ${formData.lastName}`
+            );
+            
+            const mailtoLink = `mailto:fsae.sbu@gmail.com?subject=${subject}&body=${body}`;
+            
+            // Open mailto link
+            window.location.href = mailtoLink;
         }
     };
 
     const getFieldClasses = (fieldName) => {
         const hasError = touched[fieldName] && errors[fieldName];
-        return `w-full px-1 py-3 border-b-2 bg-transparent focus:outline-none transition-colors duration-200 text-gray-900 ${
+        return `w-full px-1 py-3 border-b-2 bg-transparent focus:outline-none transition-colors duration-200 text-gray-900 dark:text-white ${
             hasError 
                 ? 'border-red-500 focus:border-red-500' 
-                : 'border-gray-300 focus:border-red-500'
+                : 'border-gray-300 dark:border-[#808080] focus:border-red-500'
         }`;
     };
 
     const getTextareaClasses = (fieldName) => {
         const hasError = touched[fieldName] && errors[fieldName];
-        return `w-full px-1 py-2 border-b-2 bg-transparent focus:outline-none transition-colors duration-200 text-gray-900 resize-none ${
+        return `w-full px-1 py-2 border-b-2 bg-transparent focus:outline-none transition-colors duration-200 text-gray-900 dark:text-white resize-none ${
             hasError 
                 ? 'border-red-500 focus:border-red-500' 
-                : 'border-gray-300 focus:border-red-500'
+                : 'border-gray-300 dark:border-[#808080] focus:border-red-500'
         }`;
     };
 
     return (
-        <div className="flex-1 bg-white pt-8 lg:pt-32 px-6 lg:px-12">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
+        <div className="flex-1 bg-white dark:bg-[#191919] pt-8 lg:pt-32 px-6 lg:px-12">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16">
                 <div className="max-w-4xl mx-auto lg:mx-0 lg:ml-12">
-                    <h1 className="text-5xl lg:text-6xl font-bold text-black-900 mb-12">
+                    <h1 className="text-5xl lg:text-6xl font-bold text-black-900 dark:text-white mb-12">
                         Contact Us
                     </h1>
                     
-                    <div className="space-y-8 text-lg lg:text-xl text-black-700 leading-relaxed">
+                    <div className="space-y-8 text-lg lg:text-xl text-black-700 dark:text-gray-300 leading-relaxed">
                         <p>
                             Have any questions? Just want to reach out? Shoot our team an email!
                         </p>
@@ -112,7 +118,7 @@ function ContactUs() {
                         </p>
                         
                         <div className="pt-8">
-                            <p className="text-2xl lg:text-3xl font-mono text-black-800 mb-8">
+                            <p className="text-2xl lg:text-3xl font-mono text-black-800 dark:text-gray-200 mb-8">
                                 fsae.sbu@gmail.com
                             </p>
                             
@@ -121,7 +127,7 @@ function ContactUs() {
                                     href="https://www.linkedin.com/company/redracingsbufsae/" 
                                     target="_blank" 
                                     rel="noopener noreferrer"
-                                    className="text-black-600 hover:text-gray-600 transition-colors duration-200"
+                                    className="text-black-600 dark:text-gray-400 hover:text-gray-600 dark:hover:text-gray-200 transition-colors duration-200"
                                 >
                                     <LinkedIn className="w-8 h-8" />
                                 </a>
@@ -129,7 +135,7 @@ function ContactUs() {
                                     href="" 
                                     target="_blank" 
                                     rel="noopener noreferrer"
-                                    className="text-black-600 hover:text-gray-600 transition-colors duration-200"
+                                    className="text-black-600 dark:text-gray-400 hover:text-gray-600 dark:hover:text-gray-200 transition-colors duration-200"
                                 >
                                     <Instagram className="w-8 h-8" />
                                 </a>
@@ -137,7 +143,7 @@ function ContactUs() {
                                     href="https://discord.gg/K2RYYcz5jA" 
                                     target="_blank" 
                                     rel="noopener noreferrer"
-                                    className="text-black-600 hover:text-gray-600 transition-colors duration-200"
+                                    className="text-black-600 dark:text-gray-400 hover:text-gray-600 dark:hover:text-gray-200 transition-colors duration-200"
                                 >
                                     <Discord className="w-8 h-8" />
                                 </a>
@@ -145,12 +151,12 @@ function ContactUs() {
                         </div>
                     </div>
                 </div>
-                <div className="max-w-4xl mx-auto lg:mx-0 lg:mr-12">
-                    <div className="bg-gray-50 p-8 rounded-lg sticky top-4 self-start">
+                <div className="max-w-4xl lg:mx-0 lg:mr-12">
+                    <div className="bg-gray-50 dark:bg-black p-8 rounded-lg sticky top-4 self-start mb-8 lg:mb-0">
                         <form onSubmit={handleSubmit} noValidate className="space-y-6">
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                 <div className="relative">
-                                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                                         First
                                     </label>
                                     <input
@@ -167,7 +173,7 @@ function ContactUs() {
                                     )}
                                 </div>
                                 <div className="relative">
-                                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                                         Last
                                     </label>
                                     <input
@@ -186,25 +192,7 @@ function ContactUs() {
                             </div>
 
                             <div className="relative">
-                                <label className="block text-sm font-medium text-gray-700 mb-2">
-                                    Email
-                                </label>
-                                <input
-                                    type="email"
-                                    name="email"
-                                    value={formData.email}
-                                    onChange={handleChange}
-                                    onBlur={handleBlur}
-                                    className={getFieldClasses('email')}
-                                    required
-                                />
-                                {touched.email && errors.email && (
-                                    <p className="absolute text-red-500 text-xs mt-1">{errors.email}</p>
-                                )}
-                            </div>
-
-                            <div className="relative">
-                                <label className="block text-sm font-medium text-gray-700 mb-2">
+                                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                                     Topic
                                 </label>
                                 <input
@@ -222,7 +210,7 @@ function ContactUs() {
                             </div>
 
                             <div className="relative">
-                                <label className="block text-sm font-medium text-gray-700 mb-2">
+                                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                                     Message
                                 </label>
                                 <textarea
