@@ -18,3 +18,7 @@ footer {
     padding: 2rem;
   }
 }
+
+.header {
+  display: flex;
+}

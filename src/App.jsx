@@ -1,45 +1,35 @@
-import './App.css'
-import MenuBar from './components/MenuBar.jsx';
 import Header from './components/Header.jsx';
 import Home from './pages/Home.jsx';
 import About from './pages/About.jsx';
 import Join from './pages/Join.jsx';
 import Sponsors from './pages/Sponsors.jsx';
-import { useState, useEffect } from 'react';
-import { Routes, Route, Navigate, useLocation } from 'react-router-dom';
-
+import CarModel from './components/CarModel.jsx';
+import { Routes, Route, Navigate } from 'react-router-dom';
+import ContactUs from './pages/ContactUs.jsx';
 
 function App() {
-  const [menuOpen, setMenuOpen] = useState(false);
-  const location = useLocation();
-
-  const handleMenuToggle = () => {
-    setMenuOpen(!menuOpen);
-  };
-
-  useEffect(() => {
-    setMenuOpen(false);
-  }, [location]);
-
   return (
-      <div className="main">
-        <Header onMenuToggle={handleMenuToggle} />
-        <MenuBar menuOpen={menuOpen}/>
-
+    <div className="main min-h-screen flex flex-col w-full">
+      <Header />
+      <main className="flex-1">
         <Routes>
-          <Route path='/' element={<Home/>} />
-          <Route path='/home' element={<Home/>} />
-          <Route path='/about' element={<About/>} />
-          <Route path='/join' element={<Join/>} />
-          <Route path='/sponsors' element={<Sponsors/>} />
-          <Route path="*" element={<Navigate to='/' />} />
+          <Route path="/" element={<Home />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/join" element={<Join />} />
+          <Route path="/car" element={<CarModel />} />
+          <Route path="/sponsors" element={<Sponsors />} />
+          <Route path="/contact" element={<ContactUs />} />
+          <Route path="*" element={<Navigate to="/" />} />
         </Routes>
-
-        <footer>
-            Formula SAE at Stony Brook University
-        </footer>
-      </div>
-  )
+      </main>
+      <footer
+        className="w-full text-center pb-2 font-normal"
+        style={{ fontFamily: '"Courier New", Courier, monospace'}}
+      >
+        Formula SAE at Stony Brook University
+      </footer>
+    </div>
+  );
 }
 
-export default App
+export default App;
