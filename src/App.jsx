@@ -23,7 +23,7 @@ function App() {
         </Routes>
       </main>
       <footer
-        className="w-full text-center pb-2 font-normal text-gray-900 dark:text-white"
+        className="w-full text-center pb-2 font-normal text-gray-900 dark:text-white z-49 relative"
         style={{ fontFamily: '"Courier New", Courier, monospace'}}
       >
         Formula SAE at Stony Brook University

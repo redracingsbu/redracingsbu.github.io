@@ -27,6 +27,7 @@ function RotatableModel() {
   // Mouse event handlers
   const handleMouseDown = (event) => {
     event.preventDefault();
+    event.stopPropagation();
     setIsDragging(true);
     setPreviousMouse([event.clientX, event.clientY]);
     rotationSpeed.current = [0, 0];
@@ -36,6 +37,7 @@ function RotatableModel() {
     if (!isDragging) return;
     
     event.preventDefault();
+    event.stopPropagation();
     const deltaX = (event.clientX - previousMouse[0]) * 0.01;
     const deltaY = (event.clientY - previousMouse[1]) * 0.01;
     
@@ -54,6 +56,7 @@ function RotatableModel() {
   // Touch event handlers
   const handleTouchStart = (event) => {
     event.preventDefault();
+    event.stopPropagation();
     if (event.touches.length === 1) {
       const touch = event.touches[0];
       setIsDragging(true);
@@ -66,6 +69,7 @@ function RotatableModel() {
     if (!isDragging || event.touches.length !== 1) return;
     
     event.preventDefault();
+    event.stopPropagation();
     const touch = event.touches[0];
     const deltaX = (touch.clientX - previousMouse[0]) * 0.01;
     const deltaY = (touch.clientY - previousMouse[1]) * 0.01;
@@ -117,8 +121,8 @@ function RotatableModel() {
   });
 
   // Different position and rotation based on device type
-  const modelPosition = isMobile ? [0, 0, 0.75] : [1, 0, 0];
-  const modelRotation = isMobile ? [0, 0, 0] : [0, Math.PI / 2, 0];
+  const modelPosition = isMobile ? [0, -1.5, -0.4] : [1, 0, 0];
+  const modelRotation = isMobile ? [0, Math.PI, 0] : [0, Math.PI / 2, 0];
 
   return (
     <group 
@@ -154,17 +158,24 @@ function CarModel() {
   const cameraPosition = isMobile ? [0, 8, 0] : [0, 5, 0];
 
   return (
-    <div className="flex-1 w-full h-[86vh] bg-white dark:bg-[#191919]">
+    <div 
+      className="fixed inset-0 z-10"
+      style={{ 
+        pointerEvents: 'none',
+        mixBlendMode: 'normal'
+      }}
+    >
       <Canvas 
         shadows 
         className="w-full h-full"
         style={{ 
           width: '100%', 
           height: '100%', 
-          touchAction: 'none',
-          userSelect: 'none'
+          pointerEvents: 'auto',
+          background: 'transparent'
         }}
         camera={{ position: cameraPosition, fov: 75 }}
+        gl={{ alpha: true }}
       >
         {/* Large invisible plane behind camera for light reflection */}
         <mesh position={[0, 0, 15]} rotation={[0, 0, 0]}>
