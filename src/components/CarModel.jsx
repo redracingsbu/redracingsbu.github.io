@@ -12,6 +12,7 @@ function RotatableModel() {
 
   const { scene } = useGLTF('/RedBull_2022.glb');
 
+  // Check if device is mobile
   useEffect(() => {
     const checkMobile = () => {
       setIsMobile(window.innerWidth <= 768);
@@ -23,6 +24,7 @@ function RotatableModel() {
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
 
+  // Mouse event handlers
   const handleMouseDown = (event) => {
     event.preventDefault();
     setIsDragging(true);
@@ -49,6 +51,7 @@ function RotatableModel() {
     setIsDragging(false);
   };
 
+  // Touch event handlers
   const handleTouchStart = (event) => {
     event.preventDefault();
     if (event.touches.length === 1) {
@@ -79,13 +82,16 @@ function RotatableModel() {
     setIsDragging(false);
   };
 
+  // Add event listeners to the canvas
   useEffect(() => {
     const canvas = gl.domElement;
     
+    // Mouse events
     canvas.addEventListener('mousedown', handleMouseDown);
     window.addEventListener('mousemove', handleMouseMove);
     window.addEventListener('mouseup', handleMouseUp);
     
+    // Touch events
     canvas.addEventListener('touchstart', handleTouchStart, { passive: false });
     canvas.addEventListener('touchmove', handleTouchMove, { passive: false });
     canvas.addEventListener('touchend', handleTouchEnd);
@@ -100,6 +106,7 @@ function RotatableModel() {
     };
   }, [isDragging, previousMouse, gl]);
 
+  // Inertia animation
   useFrame(() => {
     if (!isDragging && groupRef.current) {
       groupRef.current.rotation.y += rotationSpeed.current[0];
@@ -109,6 +116,7 @@ function RotatableModel() {
     }
   });
 
+  // Different position and rotation based on device type
   const modelPosition = isMobile ? [0, 0, 0.75] : [1, 0, 0];
   const modelRotation = isMobile ? [0, 0, 0] : [0, Math.PI / 2, 0];
 
@@ -142,10 +150,11 @@ function CarModel() {
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
 
+  // Different camera position for mobile
   const cameraPosition = isMobile ? [0, 8, 0] : [0, 5, 0];
 
   return (
-    <div className="w-full h-full pointer-events-auto">
+    <div className="flex-1 w-full h-[86vh] bg-white dark:bg-[#191919]">
       <Canvas 
         shadows 
         className="w-full h-full"
@@ -156,10 +165,22 @@ function CarModel() {
           userSelect: 'none'
         }}
         camera={{ position: cameraPosition, fov: 75 }}
-        gl={{ alpha: true, antialias: true }}
       >
+        {/* Large invisible plane behind camera for light reflection */}
+        <mesh position={[0, 0, 15]} rotation={[0, 0, 0]}>
+          <planeGeometry args={[100, 100]} />
+          <meshLambertMaterial 
+            color="white" 
+            transparent={true}
+            opacity={0}
+            side={2}
+          />
+        </mesh>
+
+        {/* Ambient light for overall illumination */}
         <hemisphereLight intensity={0.6} skyColor="white" groundColor="gray" />
         
+        {/* Key light from front-right */}
         <directionalLight
           position={[5, 10, 8]}
           intensity={1.2}
@@ -168,12 +189,14 @@ function CarModel() {
           target-position={[0, 0, 0]}
         />
         
+        {/* Fill light from left side */}
         <directionalLight
           position={[-8, 5, 5]}
           intensity={0.8}
           castShadow={false}
         />
         
+        {/* Rim light from behind */}
         <directionalLight
           position={[0, 8, -10]}
           intensity={0.6}
