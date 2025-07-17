@@ -1,4 +1,4 @@
-import SolidWorks_Logo from '../icons/SolidWorks_Logo.svg';
+import SolidWorks_Logo from '../assets/SolidWorks_Logo.svg';
 
 function Sponsors() {
     return (

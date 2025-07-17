@@ -1,8 +1,10 @@
+'use no memo';
 import { useRef, useState, useEffect } from 'react';
 import { Canvas, useFrame, useThree } from '@react-three/fiber';
-import { OrbitControls, useGLTF } from '@react-three/drei';
+import { useGLTF } from '@react-three/drei';
 
 function RotatableModel() {
+  'use no memo';
   const groupRef = useRef();
   const [isDragging, setIsDragging] = useState(false);
   const [previousMouse, setPreviousMouse] = useState([0, 0]);
@@ -141,8 +143,14 @@ function RotatableModel() {
 }
 
 function CarModel() {
+  'use no memo';
   const [isMobile, setIsMobile] = useState(false);
+  const [canvasKey, setCanvasKey] = useState(0);
+  useEffect(() => {
+    setCanvasKey(prev => prev + 1);
+  }, []);
 
+  
   useEffect(() => {
     const checkMobile = () => {
       setIsMobile(window.innerWidth <= 768);
@@ -166,6 +174,7 @@ function CarModel() {
       }}
     >
       <Canvas 
+        key={canvasKey}
         shadows 
         className="w-full h-full"
         style={{ 
@@ -221,3 +230,4 @@ function CarModel() {
 }
 
 export default CarModel;
+useGLTF.preload('/RedBull_2022.glb');
