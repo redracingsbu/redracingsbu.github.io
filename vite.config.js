@@ -14,4 +14,19 @@ export default defineConfig({
   ],
   base: '/',
   assetsInclude: ['**/*.glb'],
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          // React ecosystem
+          'react-vendor': ['react', 'react-dom'],
+          'react-router': ['react-router-dom'],
+          
+          // Three.js and related
+          'three-vendor': ['three', '@react-three/fiber', '@react-three/drei'],
+          
+        },
+      }
+    }
+  }
 })

@@ -1,9 +1,10 @@
 import { lazy, Suspense } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import Header from './components/Header.jsx';
-import CarModel from './components/CarModel.jsx';
+// import CarModel from './components/CarModel.jsx';
 
 // Keep lazy loading for other pages
+const CarModel = lazy(() => import('./components/CarModel'));
 const Home = lazy(() => import('./pages/Home.jsx'));
 const About = lazy(() => import('./pages/About.jsx'));
 const Join = lazy(() => import('./pages/Join.jsx'));
