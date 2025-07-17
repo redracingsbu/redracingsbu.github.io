@@ -1,169 +1,234 @@
-'use no memo';
-import { useRef, useState, useEffect } from 'react';
+import { useRef, useState, useEffect, useCallback, useMemo } from 'react';
 import { Canvas, useFrame, useThree } from '@react-three/fiber';
 import { useGLTF } from '@react-three/drei';
 
+// Custom hook for device detection
+const useDeviceDetection = () => {
+  const [isMobile, setIsMobile] = useState(false);
+  const [screenWidth, setScreenWidth] = useState(typeof window !== 'undefined' ? window.innerWidth : 1920);
+
+  useEffect(() => {
+    const checkScreenSize = () => {
+      const width = window.innerWidth;
+      setScreenWidth(width);
+      setIsMobile(width <= 768);
+    };
+    
+    checkScreenSize();
+    const debouncedResize = debounce(checkScreenSize, 150);
+    window.addEventListener('resize', debouncedResize);
+    
+    return () => window.removeEventListener('resize', debouncedResize);
+  }, []);
+
+  return { isMobile, screenWidth };
+};
+
+// Debounce utility
+const debounce = (func, wait) => {
+  let timeout;
+  return function executedFunction(...args) {
+    const later = () => {
+      clearTimeout(timeout);
+      func(...args);
+    };
+    clearTimeout(timeout);
+    timeout = setTimeout(later, wait);
+  };
+};
+
+// Custom hook for drag interactions
+const useDragInteraction = (groupRef, isDragging, setIsDragging, setPreviousMouse, rotationSpeed) => {
+  const handleStart = useCallback((clientX, clientY) => {
+    setIsDragging(true);
+    setPreviousMouse([clientX, clientY]);
+    rotationSpeed.current = [0, 0];
+  }, [setIsDragging, setPreviousMouse, rotationSpeed]);
+
+  const handleMove = useCallback((clientX, clientY, previousMouse) => {
+    if (!isDragging) return;
+    
+    const deltaX = (clientX - previousMouse[0]) * 0.01;
+    const deltaY = (clientY - previousMouse[1]) * 0.01;
+    
+    if (groupRef.current) {
+      groupRef.current.rotation.y += deltaX;
+      groupRef.current.rotation.x += deltaY;
+      rotationSpeed.current = [deltaX, deltaY];
+    }
+    setPreviousMouse([clientX, clientY]);
+  }, [isDragging, groupRef, setPreviousMouse, rotationSpeed]);
+
+  const handleEnd = useCallback(() => {
+    setIsDragging(false);
+  }, [setIsDragging]);
+
+  return { handleStart, handleMove, handleEnd };
+};
+
 function RotatableModel() {
-  'use no memo';
   const groupRef = useRef();
   const [isDragging, setIsDragging] = useState(false);
   const [previousMouse, setPreviousMouse] = useState([0, 0]);
   const rotationSpeed = useRef([0, 0]);
-  const [isMobile, setIsMobile] = useState(false);
+  const { isMobile } = useDeviceDetection();
   const { gl } = useThree();
 
-  const { scene } = useGLTF('/RedBull_2022.glb');
+  const { scene } = useGLTF('/RedBull_2022.glb', true);
+  const { handleStart, handleMove, handleEnd } = useDragInteraction(
+    groupRef, isDragging, setIsDragging, setPreviousMouse, rotationSpeed
+  );
 
-  // Check if device is mobile
+  // Memoize model positioning
+  const modelProps = useMemo(() => ({
+    position: isMobile ? [0, -1.5, -0.4] : [1, 0, 0],
+    rotation: isMobile ? [0, Math.PI, 0] : [0, Math.PI / 2, 0]
+  }), [isMobile]);
+
+  // Cleanup effect
   useEffect(() => {
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth <= 768);
+    return () => {
+      scene.traverse((child) => {
+        if (child.isMesh) {
+          child.geometry?.dispose();
+          if (child.material.map) child.material.map.dispose();
+          child.material?.dispose();
+        }
+      });
     };
-    
-    checkMobile();
-    window.addEventListener('resize', checkMobile);
-    
-    return () => window.removeEventListener('resize', checkMobile);
-  }, []);
+  }, [scene]);
 
-  // Mouse event handlers
-  const handleMouseDown = (event) => {
+  // Event handlers
+  const handleMouseDown = useCallback((event) => {
     event.preventDefault();
     event.stopPropagation();
-    setIsDragging(true);
-    setPreviousMouse([event.clientX, event.clientY]);
-    rotationSpeed.current = [0, 0];
-  };
+    handleStart(event.clientX, event.clientY);
+  }, [handleStart]);
 
-  const handleMouseMove = (event) => {
-    if (!isDragging) return;
-    
+  const handleMouseMove = useCallback((event) => {
     event.preventDefault();
     event.stopPropagation();
-    const deltaX = (event.clientX - previousMouse[0]) * 0.01;
-    const deltaY = (event.clientY - previousMouse[1]) * 0.01;
-    
-    if (groupRef.current) {
-      groupRef.current.rotation.y += deltaX;
-      groupRef.current.rotation.x += deltaY;
-      rotationSpeed.current = [deltaX, deltaY];
-    }
-    setPreviousMouse([event.clientX, event.clientY]);
-  };
+    handleMove(event.clientX, event.clientY, previousMouse);
+  }, [handleMove, previousMouse]);
 
-  const handleMouseUp = () => {
-    setIsDragging(false);
-  };
-
-  // Touch event handlers
-  const handleTouchStart = (event) => {
+  const handleTouchStart = useCallback((event) => {
     event.preventDefault();
     event.stopPropagation();
     if (event.touches.length === 1) {
       const touch = event.touches[0];
-      setIsDragging(true);
-      setPreviousMouse([touch.clientX, touch.clientY]);
-      rotationSpeed.current = [0, 0];
+      handleStart(touch.clientX, touch.clientY);
     }
-  };
+  }, [handleStart]);
 
-  const handleTouchMove = (event) => {
+  const handleTouchMove = useCallback((event) => {
     if (!isDragging || event.touches.length !== 1) return;
-    
     event.preventDefault();
     event.stopPropagation();
     const touch = event.touches[0];
-    const deltaX = (touch.clientX - previousMouse[0]) * 0.01;
-    const deltaY = (touch.clientY - previousMouse[1]) * 0.01;
-    
-    if (groupRef.current) {
-      groupRef.current.rotation.y += deltaX;
-      groupRef.current.rotation.x += deltaY;
-      rotationSpeed.current = [deltaX, deltaY];
-    }
-    setPreviousMouse([touch.clientX, touch.clientY]);
-  };
+    handleMove(touch.clientX, touch.clientY, previousMouse);
+  }, [isDragging, handleMove, previousMouse]);
 
-  const handleTouchEnd = () => {
-    setIsDragging(false);
-  };
-
-  // Add event listeners to the canvas
+  // Event listeners setup
   useEffect(() => {
     const canvas = gl.domElement;
     
-    // Mouse events
     canvas.addEventListener('mousedown', handleMouseDown);
     window.addEventListener('mousemove', handleMouseMove);
-    window.addEventListener('mouseup', handleMouseUp);
+    window.addEventListener('mouseup', handleEnd);
     
-    // Touch events
     canvas.addEventListener('touchstart', handleTouchStart, { passive: false });
     canvas.addEventListener('touchmove', handleTouchMove, { passive: false });
-    canvas.addEventListener('touchend', handleTouchEnd);
+    canvas.addEventListener('touchend', handleEnd);
     
     return () => {
       canvas.removeEventListener('mousedown', handleMouseDown);
       window.removeEventListener('mousemove', handleMouseMove);
-      window.removeEventListener('mouseup', handleMouseUp);
+      window.removeEventListener('mouseup', handleEnd);
       canvas.removeEventListener('touchstart', handleTouchStart);
       canvas.removeEventListener('touchmove', handleTouchMove);
-      canvas.removeEventListener('touchend', handleTouchEnd);
+      canvas.removeEventListener('touchend', handleEnd);
     };
-  }, [isDragging, previousMouse, gl]);
+  }, [gl, handleMouseDown, handleMouseMove, handleEnd, handleTouchStart, handleTouchMove]);
 
-  // Inertia animation
+  // Inertia animation with performance optimization
   useFrame(() => {
     if (!isDragging && groupRef.current) {
-      groupRef.current.rotation.y += rotationSpeed.current[0];
-      groupRef.current.rotation.x += rotationSpeed.current[1];
-      rotationSpeed.current[0] *= 0.95;
-      rotationSpeed.current[1] *= 0.95;
+      const [speedX, speedY] = rotationSpeed.current;
+      if (Math.abs(speedX) > 0.001 || Math.abs(speedY) > 0.001) {
+        groupRef.current.rotation.y += speedX;
+        groupRef.current.rotation.x += speedY;
+        rotationSpeed.current = [speedX * 0.95, speedY * 0.95];
+      }
     }
   });
-
-  // Different position and rotation based on device type
-  const modelPosition = isMobile ? [0, -1.5, -0.4] : [1, 0, 0];
-  const modelRotation = isMobile ? [0, Math.PI, 0] : [0, Math.PI / 2, 0];
 
   return (
     <group 
       ref={groupRef} 
-      position={modelPosition}
+      position={modelProps.position}
       castShadow 
       receiveShadow
     >
       <primitive 
         object={scene} 
         scale={1} 
-        rotation={modelRotation}
+        rotation={modelProps.rotation}
       />
     </group>
   );
 }
 
+// Optimized lighting setup
+const LightingRig = () => (
+  <>
+    <ambientLight intensity={0.7} color="#ffffff" />
+    <directionalLight
+      position={[10, 15, 10]}
+      intensity={2.5}
+      color="#ffffff"
+      castShadow
+      shadow-mapSize={[2048, 2048]}
+      shadow-camera-far={50}
+      shadow-camera-left={-20}
+      shadow-camera-right={20}
+      shadow-camera-top={20}
+      shadow-camera-bottom={-20}
+    />
+    <directionalLight
+      position={[15, 8, -15]}
+      intensity={1.4}
+      color="#ffffff"
+    />
+    <directionalLight
+      position={[-12, 6, 8]}
+      intensity={1.2}
+      color="#f0f0f0"
+    />
+    <directionalLight
+      position={[0, 20, 5]}
+      intensity={1.0}
+      color="#ffffff"
+    />
+    <directionalLight
+      position={[0, -5, -10]}
+      intensity={0.8}
+      color="#e8e8e8"
+    />
+  </>
+);
+
 function CarModel() {
-  'use no memo';
-  const [isMobile, setIsMobile] = useState(false);
-  const [canvasKey, setCanvasKey] = useState(0);
-  useEffect(() => {
-    setCanvasKey(prev => prev + 1);
-  }, []);
-
+  const { isMobile, screenWidth } = useDeviceDetection();
   
-  useEffect(() => {
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth <= 768);
-    };
-    
-    checkMobile();
-    window.addEventListener('resize', checkMobile);
-    
-    return () => window.removeEventListener('resize', checkMobile);
-  }, []);
-
-  // Different camera position for mobile
-  const cameraPosition = isMobile ? [0, 8, 0] : [0, 5, 0];
+  // Memoize camera position calculation
+  const cameraSettings = useMemo(() => {
+    if (isMobile) return { position: [0, 8, 0], fov: 80 };
+    if (screenWidth <= 1366) return { position: [0, 7, 0], fov: 80 };
+    if (screenWidth <= 1600) return { position: [0, 5, 0], fov: 90 };
+    if (screenWidth <= 2000) return { position: [0, 6, 0], fov: 80 };
+    if (screenWidth <= 3000) return { position: [0, 4.5, 0], fov: 90 };
+    return { position: [0, 4, 0], fov: 80 };
+  }, [isMobile, screenWidth]);
 
   return (
     <div 
@@ -173,56 +238,20 @@ function CarModel() {
         mixBlendMode: 'normal'
       }}
     >
-      <Canvas 
-        key={canvasKey}
-        shadows 
-        className="w-full h-full"
-        style={{ 
-          width: '100%', 
-          height: '100%', 
-          pointerEvents: 'auto',
-          background: 'transparent'
-        }}
-        camera={{ position: cameraPosition, fov: 75 }}
-        gl={{ alpha: true }}
-      >
-        {/* Large invisible plane behind camera for light reflection */}
-        <mesh position={[0, 0, 15]} rotation={[0, 0, 0]}>
-          <planeGeometry args={[100, 100]} />
-          <meshLambertMaterial 
-            color="white" 
-            transparent={true}
-            opacity={0}
-            side={2}
-          />
-        </mesh>
-
-        {/* Ambient light for overall illumination */}
-        <hemisphereLight intensity={0.6} skyColor="white" groundColor="gray" />
-        
-        {/* Key light from front-right */}
-        <directionalLight
-          position={[5, 10, 8]}
-          intensity={1.2}
-          castShadow
-          shadow-mapSize={[2048, 2048]}
-          target-position={[0, 0, 0]}
-        />
-        
-        {/* Fill light from left side */}
-        <directionalLight
-          position={[-8, 5, 5]}
-          intensity={0.8}
-          castShadow={false}
-        />
-        
-        {/* Rim light from behind */}
-        <directionalLight
-          position={[0, 8, -10]}
-          intensity={0.6}
-          castShadow={false}
-        />
-        
+        <Canvas 
+          shadows 
+          className="w-full h-full"
+          style={{ 
+            width: '100%', 
+            height: '100%', 
+            pointerEvents: 'auto',
+            background: 'transparent'
+          }}
+          camera={cameraSettings}
+          gl={{ alpha: true, antialias: true }}
+          performance={{ min: 0.5 }}
+        >
+        <LightingRig />
         <RotatableModel />
       </Canvas>
     </div>
@@ -230,4 +259,6 @@ function CarModel() {
 }
 
 export default CarModel;
+
+// Preload the model
 useGLTF.preload('/RedBull_2022.glb');

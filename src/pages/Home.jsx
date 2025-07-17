@@ -3,7 +3,7 @@ import carPortrait from '../assets/carportrait.webp';
 
 function Home() {
   return (
-    <div className="flex-1 flex items-center justify-center overflow-hidden py-5 lg:py-10">
+    <div className="flex-1 flex items-center justify-center overflow-hidden py-5 lg:py-10 2xl:py-2">
       <img 
         src={carPortrait} 
         className="block lg:hidden max-w-full max-h-full object-contain rotate-180 select-none" 
@@ -12,7 +12,7 @@ function Home() {
       />
       <img 
         src={carLandscape} 
-        className="hidden lg:block max-w-full max-h-[70vh] object-contain select-none" 
+        className="hidden lg:block max-w-full max-h-[70vh] 2xl:max-h-[85vh] object-contain select-none" 
         alt="Outline of a formula one car"
         draggable={false}
       />
