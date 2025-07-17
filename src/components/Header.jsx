@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import menuIcon from '../assets/menu.svg';
-import logoIcon from '../assets/logo.svg';
+import logoIcon from '../assets/redracing.svg';
 
 function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
