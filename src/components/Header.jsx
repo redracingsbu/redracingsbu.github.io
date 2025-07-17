@@ -3,16 +3,14 @@ import { Link, useLocation } from 'react-router-dom';
 import menuIcon from '../assets/menu.svg';
 import logoIcon from '../assets/logo.svg';
 
-
 function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [logoClicked, setLogoClicked] = useState(false);
   const location = useLocation();
-
 
   useEffect(() => {
     setMenuOpen(false);
   }, [location]);
-
 
   useEffect(() => {
     if (menuOpen) {
@@ -26,6 +24,12 @@ function Header() {
     };
   }, [menuOpen]);
 
+  const handleLogoClick = () => {
+    setLogoClicked(true);
+    setTimeout(() => {
+      setLogoClicked(false);
+    }, 200);
+  };
 
   const linkClass = `
     relative text-red-500 hover:text-white font-semibold text-lg
@@ -35,7 +39,6 @@ function Header() {
     after:transition-transform after:duration-300 after:bottom-[-6px] after:left-0
     z-40 relative
   `;
-
 
   const navLinks = (
     <>
@@ -49,22 +52,41 @@ function Header() {
     </>
   );
 
+  // Logo filter logic
+  const getLogoFilter = () => {
+    if (logoClicked) {
+      return 'invert(1) brightness(2)';
+    }
+    return 'brightness(0) saturate(100%) invert(17%) sepia(95%) saturate(7538%) hue-rotate(4deg) brightness(89%) contrast(119%)';
+  };
 
   return (
     <>
-      <header className="relative mt-8 lg:mt-6 overflow-x-hidden z-40">
+      <header className="relative mt-8 lg:mt-6 overflow-x-hidden z-[100]">
         <div className="flex items-center justify-between w-full px-6 lg:px-12 lg:py-4">
-          <Link to="/" className="flex-shrink-0 text-4xl font-[custom-font-family] tracking-wide text-center relative group transition-transform duration-300 lg:hover:translate-x-0.5 lg:hover:-translate-y-0.5 z-40">
+          <Link 
+            to="/" 
+            className="flex-shrink-0 text-4xl font-[custom-font-family] tracking-wide text-center relative group transition-transform duration-300 lg:hover:translate-x-0.5 lg:hover:-translate-y-0.5 z-40"
+            onClick={handleLogoClick}
+          >
             <img 
               src={logoIcon} 
               alt="Red Racing Logo" 
               className="h-4.5 lg:h-8 transition-all duration-300 ease-in-out"
               style={{
-                filter: 'brightness(0) saturate(100%) invert(17%) sepia(95%) saturate(7538%) hue-rotate(4deg) brightness(89%) contrast(119%)',
+                filter: getLogoFilter(),
                 transition: 'filter 300ms ease-in-out'
               }}
-              onMouseEnter={(e) => e.target.style.filter = 'invert(1) brightness(2)'}
-              onMouseLeave={(e) => e.target.style.filter = 'brightness(0) saturate(100%) invert(17%) sepia(95%) saturate(7538%) hue-rotate(4deg) brightness(89%) contrast(119%)'}
+              onMouseEnter={(e) => {
+                if (!logoClicked) {
+                  e.target.style.filter = 'invert(1) brightness(2)';
+                }
+              }}
+              onMouseLeave={(e) => {
+                if (!logoClicked) {
+                  e.target.style.filter = 'brightness(0) saturate(100%) invert(17%) sepia(95%) saturate(7538%) hue-rotate(4deg) brightness(89%) contrast(119%)';
+                }
+              }}
             />
             <div className="absolute -top-2 left-0 w-0 h-0.5 bg-white lg:group-hover:w-1/4 transition-all duration-300"></div>
             <div className="absolute -bottom-2 right-0 w-0 h-0.5 bg-white lg:group-hover:w-1/4 transition-all duration-300"></div>
@@ -74,10 +96,10 @@ function Header() {
             {navLinks}
           </nav>
 
-          {/* Mobile menu button - moved inside header */}
+          {/* Mobile menu button - stays visible */}
           <button
             type="button"
-            className="lg:hidden flex items-center justify-center z-[100]"
+            className="lg:hidden flex items-center justify-center z-[100] relative"
             aria-label="Toggle menu"
             onClick={() => setMenuOpen(!menuOpen)}
           >
@@ -95,15 +117,14 @@ function Header() {
         </div>
       </header>
       
-      {/* Mobile menu overlay */}
+      {/* Mobile menu overlay - positioned to not cover the button area */}
       <div className={`fixed inset-0 bg-[#1a1a1a] flex flex-col items-center justify-center gap-8 z-[90] lg:hidden transform transition-transform duration-300 ease-in-out ${
         menuOpen ? 'translate-x-0' : 'translate-x-full'
-      }`}>
+      }`} style={{ paddingTop: '120px' }}>
         {navLinks}
       </div>
     </>
   );
 }
-
 
 export default Header;
