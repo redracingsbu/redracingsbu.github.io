@@ -98,7 +98,7 @@ function ContactForm() {
     };
 
     return (
-        <div className="bg-gray-50 dark:bg-black p-8 rounded-lg sticky top-4 self-start mb-8 lg:mb-0">
+        <div className="bg-[#191919] p-8 rounded-lg sticky top-4 self-start mb-8 lg:mb-0">
             <form onSubmit={handleSubmit} noValidate className="space-y-6">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div className="relative">

@@ -1,21 +1,29 @@
 import carLandscape from '../assets/carlandscape.webp';
 import carPortrait from '../assets/carportrait.webp';
+import Header from '../components/Header.jsx';
+import Footer from '../components/Footer.jsx';
 
 function Home() {
   return (
-    <div className="flex-1 flex items-center justify-center overflow-hidden py-5 lg:py-10 2xl:py-2">
-      <img 
-        src={carPortrait} 
-        className="block lg:hidden max-w-full max-h-full object-contain rotate-180 select-none" 
-        alt="Outline of a formula one car"
-        draggable={false}
-      />
-      <img 
-        src={carLandscape} 
-        className="hidden lg:block max-w-full max-h-[70vh] 2xl:max-h-[85vh] object-contain select-none" 
-        alt="Outline of a formula one car"
-        draggable={false}
-      />
+    <div 
+      className="bg-black min-h-screen flex flex-col"
+      style={{
+        backgroundImage: `url(${carPortrait})`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat',
+      }}
+    >
+      <style jsx>{`
+        @media (min-width: 768px) {
+          div {
+            background-image: url(${carLandscape}) !important;
+          }
+        }
+      `}</style>
+      
+      <Header />
+      <Footer />
     </div>
   );
 }

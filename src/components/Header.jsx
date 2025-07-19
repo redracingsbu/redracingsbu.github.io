@@ -45,9 +45,7 @@ function Header() {
       <Link to="/about" className={linkClass}>About</Link>
       <Link to="/join" className={linkClass}>Join</Link>
       <Link to="/sponsors" className={linkClass}>Sponsors</Link>
-      <a href="https://www.fsaeonline.com/" target="_blank" rel="noopener noreferrer" className={linkClass}>
-        Formula SAE
-      </a>
+      <Link to="/fsae" className={linkClass}>Formula SAE</Link>
       <Link to="/contact" className={linkClass}>Contact Us</Link>
     </>
   );
@@ -118,7 +116,7 @@ function Header() {
       </header>
       
       {/* Mobile menu overlay - positioned to not cover the button area */}
-      <div className={`fixed inset-0 bg-[#1a1a1a] flex flex-col items-center justify-center gap-8 z-[90] lg:hidden transform transition-transform duration-300 ease-in-out ${
+      <div className={`fixed inset-0 bg-black flex flex-col items-center justify-center gap-8 z-[90] lg:hidden transform transition-transform duration-300 ease-in-out ${
         menuOpen ? 'translate-x-0' : 'translate-x-full'
       }`} style={{ paddingTop: '120px' }}>
         {navLinks}

@@ -1,12 +1,38 @@
+import { useState, useEffect } from 'react';
+import Header from '../components/Header.jsx';
+import Footer from '../components/Footer.jsx';
+import helmet from '../assets/helmet.webp';
+
 function About() {
+    const [isMobile, setIsMobile] = useState(window.innerWidth < 1024);
+
+    useEffect(() => {
+        const handleResize = () => {
+            setIsMobile(window.innerWidth < 1024);
+        };
+
+        window.addEventListener('resize', handleResize);
+
+        return () => {
+            window.removeEventListener('resize', handleResize);
+        };
+    }, []);
+
     return (
-        <div className="flex-1 bg-white dark:bg-[#191919] py-8 lg:py-32 px-6 lg:px-12">
-            <div className="max-w-4xl mx-auto lg:mx-0 lg:ml-12">
-                <h1 className="text-5xl lg:text-6xl font-bold text-black-900 dark:text-white mb-12">
+        <div 
+            className="bg-black min-h-screen flex flex-col bg-no-repeat 
+                       bg-contain bg-left-center 
+                       lg:bg-cover lg:bg-center"
+            style={!isMobile ? { backgroundImage: `url(${helmet})` } : {}}
+        >
+            <Header />
+            
+            <div className="flex-1 pt-8 lg:pt-32 px-6 lg:px-12 max-w-4xl lg:ml-12 p-6 rounded-lg space-y-8">
+                <h1 className="text-4xl lg:text-6xl font-bold text-white mb-12 text-left">
                     About Us
                 </h1>
                 
-                <div className="space-y-8 text-lg lg:text-xl text-black-700 dark:text-gray-300 leading-relaxed">
+                <div className="space-y-8 text-lg lg:text-xl text-gray-300 leading-relaxed">
                     <p>
                         Formed in Spring 2025, RedRacing is Stony Brook University's official Formula SAE club and Formula 
                         racing fan club. Our mission is to unite students who are passionate about vehicle engineering, 
@@ -25,6 +51,8 @@ function About() {
                     </p>
                 </div>
             </div>
+            
+            <Footer />
         </div>
     );
 }
