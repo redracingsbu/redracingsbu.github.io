@@ -23,7 +23,7 @@ export default defineConfig({
           'react-router': ['react-router-dom'],
           
           // Three.js and related
-          'three-vendor': ['three', '@react-three/fiber', '@react-three/drei'],
+          // 'three-vendor': ['three', '@react-three/fiber', '@react-three/drei'],
           
         },
       }
