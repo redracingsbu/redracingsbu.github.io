@@ -32,7 +32,7 @@ function About() {
                     About Us
                 </h1>
                 
-                <div className="space-y-8 text-lg lg:text-xl text-gray-300 leading-relaxed">
+                <div className="space-y-8 text-lg lg:text-xl text-white leading-relaxed">
                     <p>
                         Formed in Spring 2025, RedRacing is Stony Brook University's official Formula SAE club and Formula 
                         racing fan club. Our mission is to unite students who are passionate about vehicle engineering, 

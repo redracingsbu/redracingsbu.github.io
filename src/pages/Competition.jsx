@@ -31,7 +31,6 @@ function Competition() {
                 </div>
             </div>
 
-            {/* Logos Section */}
             <div className="flex flex-col lg:flex-row justify-center items-center space-y-12 lg:space-y-0 lg:space-x-16 pt-12 lg:pt-6 pb-12 lg:pb-32">
                 <img 
                     src={RedRacingLogo} 

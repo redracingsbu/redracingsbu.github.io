@@ -7,6 +7,7 @@ const Join = lazy(() => import('./pages/Join.jsx'));
 const Sponsors = lazy(() => import('./pages/Sponsors.jsx'));
 const ContactUs = lazy(() => import('./pages/ContactUs.jsx'));
 const Competition = lazy(() => import('./pages/Competition.jsx'));
+const Tiers = lazy(() => import('./pages/Tiers.jsx'));
 
 const PageLoader = () => (
   <div className="fixed inset-0 flex items-center justify-center bg-black">
@@ -24,6 +25,7 @@ function App() {
             <Route path="/sponsors" element={<Sponsors />} />
             <Route path="/contact" element={<ContactUs />} />
             <Route path="/fsae" element={<Competition />} />
+            <Route path="/tiers" element={<Tiers />} />
             <Route path="*" element={<Navigate to="/" />} />
           </Routes>
         </Suspense>
