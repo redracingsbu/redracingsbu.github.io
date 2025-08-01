@@ -52,17 +52,17 @@ function Sponsors() {
                 <div className="flex flex-col lg:flex-row justify-center items-center space-y-12 lg:space-y-0 lg:space-x-8 xl:space-x-16 pt-12 lg:pt-6 pb-12 lg:pb-32 px-6">
                     <img 
                         src={AnsysLogo} 
-                        alt="Red Racing Logo" 
+                        alt="Ansys Logo" 
                         className="w-4/5 lg:w-1/4 xl:w-2/5 max-w-xs xl:max-w-sm max-h-48 object-contain" 
                     />
                     <img 
                         src={KenestoLogo} 
-                        alt="SAE International Logo" 
+                        alt="Kenesto Logo" 
                         className="w-4/5 lg:w-1/4 xl:w-2/5 max-w-xs xl:max-w-sm max-h-48 object-contain" 
                     />
                     <img 
                         src={ViGradeLogo} 
-                        alt="SAE International Logo" 
+                        alt="ViGrade Logo" 
                         className="w-4/5 lg:w-1/4 xl:w-2/5 max-w-xs xl:max-w-sm max-h-48 object-contain" 
                     />
                 </div>
@@ -70,12 +70,12 @@ function Sponsors() {
                 <div className="flex flex-col lg:flex-row justify-center items-center space-y-12 lg:space-y-0 lg:space-x-8 xl:space-x-16 pb-12 lg:pb-32 px-6">
                     <img 
                         src={HumaneticsLogo} 
-                        alt="Red Racing Logo" 
+                        alt="Humanetics Logo" 
                         className="w-4/5 lg:w-1/3 xl:w-2/5 max-w-sm xl:max-w-md max-h-48 object-contain" 
                     />
                     <img 
                         src={RapidharnessLogo} 
-                        alt="SAE International Logo" 
+                        alt="Rapidharness Logo" 
                         className="w-4/5 lg:w-1/3 xl:w-2/5 max-w-sm xl:max-w-md max-h-48 object-contain" 
                     />
                 </div>
@@ -87,7 +87,7 @@ function Sponsors() {
                     <img 
                         src={SolidWorksLogo} 
                         alt="SolidWorks Logo" 
-                        className="h-15 lg:h-20 xl:h-30 w-auto max-w-xs lg:max-w-sm xl:max-w-md"
+                        className="h-15 lg:h-20 xl:h-30"
                     />
                 </div>
                 <div className="bg-zinc-700 w-full text-center py-3 bg-gray text-white text-3xl lg:text-5xl font-bold">
@@ -96,17 +96,17 @@ function Sponsors() {
                 <div className="flex flex-col lg:flex-row justify-center items-center space-y-12 lg:space-y-0 lg:space-x-8 xl:space-x-16 pt-12 lg:pt-6 pb-12 lg:pb-32 px-6">
                     <img 
                         src={CoLabLogo} 
-                        alt="SolidWorks Logo" 
+                        alt="Colab Logo" 
                         className="h-20 lg:h-24 xl:h-30 w-auto max-w-xs lg:max-w-sm"
                     />
                     <img 
                         src={AltiumLogo} 
-                        alt="SolidWorks Logo" 
+                        alt="Altium Logo" 
                         className="h-20 lg:h-24 xl:h-30 w-auto max-w-xs lg:max-w-sm"
                     />
                     <img 
                         src={AceControlsLogo} 
-                        alt="SolidWorks Logo" 
+                        alt="Ace Controls Logo" 
                         className="h-20 lg:h-24 xl:h-30 w-auto max-w-xs lg:max-w-sm"
                     />
                 </div>
