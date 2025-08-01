@@ -10,7 +10,6 @@ import AceControlsLogo from '../assets/Ace_Controls_logo.svg'
 import Header from '../components/Header.jsx';
 import Footer from '../components/Footer.jsx';
 
-
 function Sponsors() {
     return (
         <div className="bg-black min-h-screen flex flex-col">
@@ -26,10 +25,10 @@ function Sponsors() {
                             RedRacing is a newly formed FSAE team driven by a passionate group of student engineers. With minimal funding and limited resources provided from our university, we rely heavily on external support to bring our vision to life.
                         </p>
                         <p>
-                            Your partnership will directly contribute to the design, fabrication, and testing of Stony Brook University’s first ever FSAE car – a milestone achievement for both our team and the institution.
+                            Your partnership will directly contribute to the design, fabrication, and testing of Stony Brook University's first ever FSAE car – a milestone achievement for both our team and the institution.
                         </p>
                         <p>
-                            Every contribution, whether financial, material, or technical, plays a crucial role in bringing this dream to life and laying the foundation for our team’s long-term success.
+                            Every contribution, whether financial, material, or technical, plays a crucial role in bringing this dream to life and laying the foundation for our team's long-term success.
                         </p>
                     </div>
                     <div className="pt-4">
@@ -44,41 +43,40 @@ function Sponsors() {
                     </div>
                 </div>
             </div>
-   
 
             <div className="flex flex-col items-center justify-center pointer-events-none space-y-4 pointer-events-auto mt-24 lg:mt-[30vh]">
                 <div className="bg-zinc-700 w-full text-center py-3 bg-gray text-white text-3xl lg:text-5xl font-bold">
                     Platinum
                 </div>
 
-                <div className="flex flex-col lg:flex-row justify-center items-center space-y-12 lg:space-y-0 lg:space-x-16 pt-12 lg:pt-6 pb-12 lg:pb-32 px-6">
+                <div className="flex flex-col lg:flex-row justify-center items-center space-y-12 lg:space-y-0 lg:space-x-8 xl:space-x-16 pt-12 lg:pt-6 pb-12 lg:pb-32 px-6">
                     <img 
                         src={AnsysLogo} 
                         alt="Red Racing Logo" 
-                        className="w-4/5 lg:w-2/5 max-h-48 object-contain" 
+                        className="w-4/5 lg:w-1/4 xl:w-2/5 max-w-xs xl:max-w-sm max-h-48 object-contain" 
                     />
                     <img 
                         src={KenestoLogo} 
                         alt="SAE International Logo" 
-                        className="w-4/5 lg:w-2/5 max-h-48 object-contain" 
+                        className="w-4/5 lg:w-1/4 xl:w-2/5 max-w-xs xl:max-w-sm max-h-48 object-contain" 
                     />
                     <img 
                         src={ViGradeLogo} 
                         alt="SAE International Logo" 
-                        className="w-4/5 lg:w-2/5 max-h-48 object-contain" 
+                        className="w-4/5 lg:w-1/4 xl:w-2/5 max-w-xs xl:max-w-sm max-h-48 object-contain" 
                     />
                 </div>
 
-                <div className="flex flex-col lg:flex-row justify-center items-center space-y-12 lg:space-y-0 lg:space-x-16 pb-12 lg:pb-32  px-6">
+                <div className="flex flex-col lg:flex-row justify-center items-center space-y-12 lg:space-y-0 lg:space-x-8 xl:space-x-16 pb-12 lg:pb-32 px-6">
                     <img 
                         src={HumaneticsLogo} 
                         alt="Red Racing Logo" 
-                        className="w-4/5 lg:w-2/5 max-h-48 object-contain" 
+                        className="w-4/5 lg:w-1/3 xl:w-2/5 max-w-sm xl:max-w-md max-h-48 object-contain" 
                     />
                     <img 
                         src={RapidharnessLogo} 
                         alt="SAE International Logo" 
-                        className="w-4/5 lg:w-2/5 max-h-48 object-contain" 
+                        className="w-4/5 lg:w-1/3 xl:w-2/5 max-w-sm xl:max-w-md max-h-48 object-contain" 
                     />
                 </div>
 
@@ -89,31 +87,30 @@ function Sponsors() {
                     <img 
                         src={SolidWorksLogo} 
                         alt="SolidWorks Logo" 
-                        className="h-15 lg:h-30 w-auto"
+                        className="h-15 lg:h-20 xl:h-30 w-auto max-w-xs lg:max-w-sm xl:max-w-md"
                     />
                 </div>
                 <div className="bg-zinc-700 w-full text-center py-3 bg-gray text-white text-3xl lg:text-5xl font-bold">
                     Bronze
                 </div>
-                <div className="flex flex-col lg:flex-row justify-center items-center space-y-12 lg:space-y-0 lg:space-x-16 pt-12 lg:pt-6 pb-12 lg:pb-32 px-6">
+                <div className="flex flex-col lg:flex-row justify-center items-center space-y-12 lg:space-y-0 lg:space-x-8 xl:space-x-16 pt-12 lg:pt-6 pb-12 lg:pb-32 px-6">
                     <img 
                         src={CoLabLogo} 
                         alt="SolidWorks Logo" 
-                        className="h-30 w-auto"
+                        className="h-20 lg:h-24 xl:h-30 w-auto max-w-xs lg:max-w-sm"
                     />
                     <img 
                         src={AltiumLogo} 
                         alt="SolidWorks Logo" 
-                        className="h-30 w-auto"
+                        className="h-20 lg:h-24 xl:h-30 w-auto max-w-xs lg:max-w-sm"
                     />
                     <img 
                         src={AceControlsLogo} 
                         alt="SolidWorks Logo" 
-                        className="h-30 w-auto"
+                        className="h-20 lg:h-24 xl:h-30 w-auto max-w-xs lg:max-w-sm"
                     />
                 </div>
             </div>
-
             
             <Footer />
         </div>
