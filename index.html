@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/logo.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SBU Red Racing</title>
+    <script>
+      (function(){
+        var redirect = sessionStorage.redirect;
+        delete sessionStorage.redirect;
+        if (redirect && redirect != location.pathname) {
+          history.replaceState(null, null, redirect);
+        }
+      })();
+    </script>
+    <script type="module" crossorigin src="/assets/index-ZDB6EFBr.js"></script>
+    <link rel="modulepreload" crossorigin href="/assets/react-vendor-1zw1pNgy.js">
+    <link rel="modulepreload" crossorigin href="/assets/react-router-B7kevx0P.js">
+    <link rel="stylesheet" crossorigin href="/assets/index-DCdULAH8.css">
+  </head>
+  <body>
+    <div id="root"></div>
+  </body>
+</html>
