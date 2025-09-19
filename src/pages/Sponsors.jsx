@@ -35,8 +35,6 @@ function Sponsors() {
                     <div className="pt-4">
                         <Link
                             to="/contact" 
-                            target="_blank" 
-                            rel="noopener noreferrer"
                             className="inline-block bg-red-500 hover:bg-red-600 text-white font-bold py-3 px-6 text-xl lg:text-2xl uppercase tracking-wide transition-colors duration-200"
                         >
                             Become a Sponsor
