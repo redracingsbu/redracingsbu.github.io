@@ -9,6 +9,7 @@ import AltiumLogo from '../assets/Altium_Limited_logo.svg'
 import AceControlsLogo from '../assets/Ace_Controls_logo.svg'
 import Header from '../components/Header.jsx';
 import Footer from '../components/Footer.jsx';
+import { Link } from 'react-router-dom';
 
 function Sponsors() {
     return (
@@ -32,14 +33,14 @@ function Sponsors() {
                         </p>
                     </div>
                     <div className="pt-4">
-                        <a 
-                            href="/contact" 
+                        <Link
+                            to="/contact" 
                             target="_blank" 
                             rel="noopener noreferrer"
                             className="inline-block bg-red-500 hover:bg-red-600 text-white font-bold py-3 px-6 text-xl lg:text-2xl uppercase tracking-wide transition-colors duration-200"
                         >
                             Become a Sponsor
-                        </a>
+                        </Link>
                     </div>
                 </div>
             </div>
