@@ -5,19 +5,26 @@
     <link rel="icon" type="image/svg+xml" href="/logo.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>SBU Red Racing</title>
-    <script>
-      (function(){
-        var redirect = sessionStorage.redirect;
-        delete sessionStorage.redirect;
-        if (redirect && redirect != location.pathname) {
-          history.replaceState(null, null, redirect);
-        }
-      })();
-    </script>
-    <script type="module" crossorigin src="/assets/index-ZDB6EFBr.js"></script>
+  <script>
+    (function (l) {
+      if (l.search && l.search[1] === '/') {
+        var decoded = l.search
+          .slice(1)
+          .split('?')
+          .map(function (s) {
+            return s.replace(/~and~/g, '&');
+          })
+          .join('?');
+        var newPath = decoded.split('?')[0] || '/';
+        var rest = decoded.slice(newPath.length);
+        window.history.replaceState(null, null, newPath + rest + l.hash);
+      }
+    })(window.location);
+  </script>
+    <script type="module" crossorigin src="/assets/index-CMumt2kG.js"></script>
     <link rel="modulepreload" crossorigin href="/assets/react-vendor-1zw1pNgy.js">
     <link rel="modulepreload" crossorigin href="/assets/react-router-B7kevx0P.js">
-    <link rel="stylesheet" crossorigin href="/assets/index-DCdULAH8.css">
+    <link rel="stylesheet" crossorigin href="/assets/index-oEsm1Bd8.css">
   </head>
   <body>
     <div id="root"></div>
