@@ -14,8 +14,8 @@ function Tiers() {
   return (
     <div className="bg-black min-h-screen flex flex-col">
       <Header />
-      <div className="flex-1 flex items-center justify-center px-4">
-        <div className="p-6 lg:p-12 max-w-5xl w-full bg-gray-900">
+      <div className="flex-1 flex items-center justify-center px-4 pt-3 pb-3">
+        <div className="p-4 lg:p-8 max-w-5xl w-full bg-gray-900">
           <h1 className="text-4xl lg:text-5xl font-bold text-white text-center mb-12 uppercase">
             Sponsorship Tiers
           </h1>

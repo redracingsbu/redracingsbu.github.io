@@ -56,6 +56,7 @@ function Header() {
     after:content-[''] after:block after:absolute after:w-full after:h-0.5
     after:bg-white after:scale-x-0 hover:after:scale-x-100
     after:transition-transform after:duration-300 after:bottom-[-6px] after:left-0
+    whitespace-nowrap
     z-40
   `;
 
@@ -103,7 +104,7 @@ function Header() {
         </span>
       </Link>
       <div
-        className={`absolute left-1/2 top-full min-w-[175px] bg-black rounded-lg shadow-[0_6px_32px_rgba(0,0,0,0.4)] z-50 flex flex-col p-0 pt-1 -translate-x-1/2 mt-1 ${sponsorDropdownOpen ? 'flex' : 'hidden'}`}
+        className={`absolute left-1/2 top-full min-w-[175px] bg-black shadow-[0_6px_32px_rgba(0,0,0,0.4)] z-50 flex flex-col p-0 pt-1 -translate-x-1/2 mt-1 ${sponsorDropdownOpen ? 'flex' : 'hidden'}`}
       >
         <Link
           to="/tiers"
@@ -163,12 +164,12 @@ function Header() {
           <Link
             to="/"
             onClick={handleLogoClick}
-            className="flex-shrink-0 text-4xl font-[custom-font-family] tracking-wide text-center relative group transition-transform duration-300 lg:hover:translate-x-0.5 lg:hover:-translate-y-0.5 z-40"
+            className="flex-shrink-0 text-4xl font-[custom-font-family] tracking-wide text-center relative group transition-transform duration-300 lg:hover:-translate-y-0.5 z-40"
           >
             <img
               src={logoIcon}
               alt="Red Racing Logo"
-              className="h-[18px] lg:h-8 transition-all duration-300 ease-in-out"
+              className="h-[18px] lg:h-7 transition-all duration-300 ease-in-out"
               style={{
                 filter: getLogoFilter(),
                 transition: 'filter 300ms ease-in-out',
@@ -188,7 +189,7 @@ function Header() {
             <div className="absolute -top-2 left-0 w-0 h-0.5 bg-white lg:group-hover:w-1/4 transition-all duration-300"></div>
             <div className="absolute -bottom-2 right-0 w-0 h-0.5 bg-white lg:group-hover:w-1/4 transition-all duration-300"></div>
           </Link>
-          <nav className="hidden lg:flex flex-1 justify-end gap-14 items-center ml-10 z-40 relative">
+          <nav className="hidden lg:flex flex-1 justify-end gap-12 items-center ml-10 z-40 relative">
             {navLinksDesktop}
           </nav>
           <button

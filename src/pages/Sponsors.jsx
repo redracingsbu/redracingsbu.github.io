@@ -17,7 +17,7 @@ function Sponsors() {
             <Header />
             
             <div className="flex flex-1 items-start justify-center">
-                <div className="pt-8 lg:pt-32 px-6 lg:px-12 max-w-6xl p-6 rounded-lg space-y-8 w-full">
+                <div className="pt-8 lg:pt-24 px-6 lg:px-12 max-w-6xl p-6 rounded-lg space-y-8 w-full">
                     <h1 className="text-4xl lg:text-6xl font-bold text-white mb-12 text-center">
                         Thank you to our Partners!
                     </h1>

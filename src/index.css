@@ -1,1 +1,8 @@
 @import "tailwindcss";
+
+@layer base {
+  html {
+  scrollbar-gutter: stable both-edges;
+  background-color: black;
+  }
+}

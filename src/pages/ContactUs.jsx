@@ -10,7 +10,7 @@ function ContactUs() {
         <div className="bg-black min-h-screen flex flex-col">
             <Header />
 
-            <div className="flex-1 flex items-start pt-8 lg:pt-32 px-6 lg:px-12">
+            <div className="flex-1 flex items-start pt-8 lg:pt-24 px-6 lg:px-12">
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 w-full">
                     <div className="max-w-4xl mx-auto lg:mx-0 lg:ml-12">
                         <h1 className="text-4xl lg:text-6xl font-bold text-white mb-8">
@@ -27,7 +27,7 @@ function ContactUs() {
                             </p>
                             
                             <div className="pt-6">
-                                <p className="text-2xl lg:text-6xl font-mono text-gray-200 mb-6">
+                                <p className="text-2xl lg:text-5xl font-mono text-gray-200 mb-6">
                                     fsae.sbu@gmail.com
                                 </p>
                                 
