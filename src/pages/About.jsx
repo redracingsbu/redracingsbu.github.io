@@ -1,6 +1,4 @@
 import { useState, useEffect } from 'react';
-import Header from '../components/Header.jsx';
-import Footer from '../components/Footer.jsx';
 import helmet from '../assets/helmet.webp';
 
 function About() {
@@ -25,34 +23,32 @@ function About() {
                        lg:bg-cover lg:bg-center"
             style={!isMobile ? { backgroundImage: `url(${helmet})` } : {}}
         >
-            <Header />
             
-            <div className="flex-1 pt-8 lg:pt-24 px-6 lg:px-12 max-w-4xl lg:ml-12 p-6 rounded-lg space-y-8">
+            <div className="flex-1 pt-8 lg:pt-24 px-6 lg:px-12 max-w-3xl lg:ml-12 p-6 space-y-8">
                 <h1 className="text-4xl lg:text-6xl font-bold text-white mb-12 text-left">
                     About Us
                 </h1>
                 
                 <div className="space-y-4 text-lg lg:text-xl text-white leading-relaxed">
                     <p>
-                        Formed in Spring 2025, RedRacing is Stony Brook University's official Formula SAE club and Formula 
-                        racing fan club. Our mission is to unite students who are passionate about vehicle engineering, 
-                        motorsports, and hands-on innovation through both collaborative design work and racing culture.
+                        RedRacing is Stony Brook's First Formula SAE team, founded in 2025 in a dorm room by a group of new 
+                        engineering students who shared a love for Formula 1 and high-performance vehicles.  
                     </p>
                     
                     <p>
-                        While we are a formally recognized club, we are still in the early stages of securing CEAS approval and 
-                        funding to build our first car. We're actively working through administrative, technical, and financial 
-                        hurdles to turn this vision into reality — and we welcome all the support we can get.
+                        After joining the existing Baja SAE team, we realized two things: we wanted to pursue the technical 
+                        challenge of a true formula-style car, and we wanted to build a team where students could learn 
+                        hands-on from day one.  
                     </p>
                     
                     <p>
-                        Whether you're a student, racing fan, alumni, or potential sponsor, we'd love to have you be part of our 
-                        journey.
+                        What started as a few freshmen with an idea has evolved into a cross-disciplinary organization of 
+                        over 30 mechanical, electrical, computer, software, physics, chemistry, and business students 
+                        united around one goal: design, build, and compete with a Formula SAE vehicle on the international stage.
                     </p>
                 </div>
             </div>
             
-            <Footer />
         </div>
     );
 }

@@ -17,7 +17,7 @@ function ContactUs() {
                             Contact Us
                         </h1>
                         
-                        <div className="space-y-6 text-lg lg:text-xl text-gray-300 leading-relaxed">
+                        <div className="space-y-6 text-lg lg:text-xl text-white leading-relaxed">
                             <p>
                                 Have any questions? Just want to reach out? Shoot our team an email!
                             </p>

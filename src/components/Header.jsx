@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import menuIcon from '../assets/menu.svg';
 import logoIcon from '../assets/redracing.svg';
@@ -6,16 +6,14 @@ import logoIcon from '../assets/redracing.svg';
 function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [logoClicked, setLogoClicked] = useState(false);
-  const [sponsorDropdownOpen, setSponsorDropdownOpen] = useState(false);
   const location = useLocation();
 
-  const dropdownWrapRef = useRef(null);
-
+  // Close mobile menu when route changes
   useEffect(() => {
     setMenuOpen(false);
-    setSponsorDropdownOpen(false);
   }, [location]);
 
+  // Lock body scroll when mobile menu is open
   useEffect(() => {
     if (menuOpen) {
       document.body.style.overflow = 'hidden';
@@ -27,27 +25,18 @@ function Header() {
     };
   }, [menuOpen]);
 
-  useEffect(() => {
-    function handleDocClick(e) {
-      if (
-        sponsorDropdownOpen &&
-        dropdownWrapRef.current &&
-        !dropdownWrapRef.current.contains(e.target)
-      ) {
-        setSponsorDropdownOpen(false);
-      }
-    }
-    if (sponsorDropdownOpen) {
-      window.addEventListener('mousedown', handleDocClick);
-    }
-    return () => window.removeEventListener('mousedown', handleDocClick);
-  }, [sponsorDropdownOpen]);
-
   const handleLogoClick = () => {
     setLogoClicked(true);
     setTimeout(() => {
       setLogoClicked(false);
     }, 200);
+  };
+
+  const getLogoFilter = () => {
+    if (logoClicked) {
+      return 'invert(1) brightness(2)';
+    }
+    return 'brightness(0) saturate(100%) invert(17%) sepia(95%) saturate(7538%) hue-rotate(4deg) brightness(89%) contrast(119%)';
   };
 
   const linkClass = `
@@ -60,100 +49,35 @@ function Header() {
     z-40
   `;
 
-  const getLogoFilter = () => {
-    if (logoClicked) {
-      return 'invert(1) brightness(2)';
-    }
-    return 'brightness(0) saturate(100%) invert(17%) sepia(95%) saturate(7538%) hue-rotate(4deg) brightness(89%) contrast(119%)';
-  };
-
-  const sponsorDropdownDesktop = (
-    <div
-      className="relative z-50 flex flex-col items-center min-w-[120px]"
-      ref={dropdownWrapRef}
-      onMouseEnter={() => setSponsorDropdownOpen(true)}
-      onMouseLeave={() => setSponsorDropdownOpen(false)}
-      onFocus={() => setSponsorDropdownOpen(true)}
-      onBlur={() => setSponsorDropdownOpen(false)}
-      tabIndex={0}
-    >
-      <Link
-        to="/sponsors"
-        className={`
-          ${linkClass}
-          flex items-center justify-center gap-1 w-full relative z-40 text-lg min-w-30 ml-2
-          ${sponsorDropdownOpen ? 'text-white' : 'text-red-500'}
-        `}
-        aria-haspopup="true"
-        aria-expanded={sponsorDropdownOpen}
-      >
-        <span className="inline-flex items-center relative">
-          Sponsors
-          <svg
-            className={`ml-1 transition-transform duration-400 mt-1 ${sponsorDropdownOpen ? 'rotate-180' : 'rotate-0'}`}
-            aria-hidden="true"
-            fill="none"
-            viewBox="0 0 20 20"
-            stroke="currentColor"
-            strokeWidth={1}
-            height="2em"
-            width="2em"
-          >
-            <path d="M7 8l3 3 3-3" />
-          </svg>
-        </span>
-      </Link>
-      <div
-        className={`absolute left-1/2 top-full min-w-[175px] bg-black shadow-[0_6px_32px_rgba(0,0,0,0.4)] z-50 flex flex-col p-0 pt-1 -translate-x-1/2 mt-1 ${sponsorDropdownOpen ? 'flex' : 'hidden'}`}
-      >
-        <Link
-          to="/tiers"
-          className={`${linkClass} text-base whitespace-nowrap w-full text-center flex items-center justify-center min-h-9 px-3`}
-        >
-          Sponsorship Tiers
-        </Link>
-      </div>
-    </div>
-  );
-
-  const navLinksDesktop = (
+  // Define the navigation links as a variable to reuse in both Mobile and Desktop
+  const navLinks = (
     <>
-      <Link to="/about" className={linkClass}>
-        About
+      <Link to="/" className={linkClass}>
+        Home
+      </Link>
+      <Link to="/team" className={linkClass}>
+        Team
       </Link>
       <Link to="/join" className={linkClass}>
         Join
       </Link>
-      {sponsorDropdownDesktop}
-      <Link to="/fsae" className={linkClass}>
-        Formula SAE
-      </Link>
-      <Link to="/contact" className={linkClass}>
-        Contact Us
-      </Link>
-    </>
-  );
-
-  const navLinksMobile = (
-    <>
-      <Link to="/about" className={linkClass}>
-        About
-      </Link>
-      <Link to="/join" className={linkClass}>
-        Join
+      <Link to="/carmeet" className={linkClass}>
+        Car Meet
       </Link>
       <Link to="/sponsors" className={linkClass}>
         Sponsors
       </Link>
-      <Link to="/tiers" className={linkClass}>
-        Sponsorship Tiers
-      </Link>
-      <Link to="/fsae" className={linkClass}>
-        Formula SAE
-      </Link>
       <Link to="/contact" className={linkClass}>
         Contact Us
       </Link>
+      <a 
+        href="https://www.gofundme.com/f/5nhhy-support-stony-brook-redracing-formula-sae" 
+        className={linkClass}
+        target="_blank" 
+        rel="noopener noreferrer"
+      >
+        Donate
+      </a>
     </>
   );
 
@@ -161,6 +85,8 @@ function Header() {
     <>
       <header className="relative mt-8 lg:mt-6 z-[100]">
         <div className="flex items-center justify-between w-full px-6 lg:px-12 lg:py-4">
+          
+          {/* Logo Section */}
           <Link
             to="/"
             onClick={handleLogoClick}
@@ -169,7 +95,7 @@ function Header() {
             <img
               src={logoIcon}
               alt="Red Racing Logo"
-              className="h-[18px] lg:h-7 transition-all duration-300 ease-in-out"
+              className="h-[18px] lg:h-6 transition-all duration-300 ease-in-out"
               style={{
                 filter: getLogoFilter(),
                 transition: 'filter 300ms ease-in-out',
@@ -189,9 +115,13 @@ function Header() {
             <div className="absolute -top-2 left-0 w-0 h-0.5 bg-white lg:group-hover:w-1/4 transition-all duration-300"></div>
             <div className="absolute -bottom-2 right-0 w-0 h-0.5 bg-white lg:group-hover:w-1/4 transition-all duration-300"></div>
           </Link>
-          <nav className="hidden lg:flex flex-1 justify-end gap-12 items-center ml-10 z-40 relative">
-            {navLinksDesktop}
+
+          {/* Desktop Navigation */}
+          <nav className="hidden lg:flex flex-1 justify-end gap-11 items-center ml-10 z-40 relative">
+            {navLinks}
           </nav>
+
+          {/* Mobile Hamburger Button */}
           <button
             type="button"
             className="lg:hidden flex items-center justify-center z-[100] relative"
@@ -212,12 +142,15 @@ function Header() {
           </button>
         </div>
       </header>
+
+      {/* Mobile Navigation */}
       <div
         className={`fixed inset-0 bg-black flex flex-col items-center justify-center gap-8 z-[90] lg:hidden transform transition-transform duration-300 ease-in-out pt-[120px] ${
           menuOpen ? 'translate-x-0' : 'translate-x-full'
         }`}
       >
-        {navLinksMobile}
+        <Link to="/" className={linkClass}>Home</Link>
+        {navLinks}
       </div>
     </>
   );
