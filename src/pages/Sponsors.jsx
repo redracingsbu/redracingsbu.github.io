@@ -104,7 +104,7 @@ function Sponsors() {
                 <div className="bg-zinc-700 w-full text-center py-3 bg-gray text-white text-3xl lg:text-5xl font-bold">
                     Gold
                 </div>
-                <div className="p-6 pb-24 px-6">
+                <div className="p-6 pb-12 px-6">
                     <img 
                         src={KISSsoftLogo} 
                         alt="KISSsoft Logo" 
@@ -114,7 +114,7 @@ function Sponsors() {
                 <div className="bg-zinc-700 w-full text-center py-3 bg-gray text-white text-3xl lg:text-5xl font-bold">
                     Silver
                 </div>
-                <div className="flex flex-col lg:flex-row justify-center items-center space-y-12 lg:space-y-0 lg:space-x-8 xl:space-x-16 pt-12 lg:pt-6 pb-24 px-6">
+                <div className="flex flex-col lg:flex-row justify-center items-center space-y-12 lg:space-y-0 lg:space-x-8 xl:space-x-16 pt-12 lg:pt-6 pb-12 px-6">
                     <img 
                         src={HumaneticsLogo} 
                         alt="Humanetics Logo" 
@@ -134,7 +134,7 @@ function Sponsors() {
                 <div className="bg-zinc-700 w-full text-center py-3 bg-gray text-white text-3xl lg:text-5xl font-bold">
                     Bronze
                 </div>
-                <div className="flex flex-col lg:flex-row justify-center items-center space-y-12 lg:space-y-0 lg:space-x-8 xl:space-x-16 pt-12 lg:pt-6 pb-12 lg:pb-32 px-6">
+                <div className="flex flex-col lg:flex-row justify-center items-center space-y-12 lg:space-y-0 lg:space-x-8 xl:space-x-16 pt-12 lg:pt-6 pb-12 px-6">
                     <img 
                         src={SensataLogo} 
                         alt="Sensata Logo" 
