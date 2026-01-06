@@ -24,7 +24,7 @@ function About() {
             style={!isMobile ? { backgroundImage: `url(${helmet})` } : {}}
         >
             
-            <div className="flex-1 pt-8 lg:pt-24 px-6 lg:px-12 max-w-3xl lg:ml-12 p-6 space-y-8">
+            <div className="flex-1 pt-8 lg:pt-24 px-6 lg:px-12 max-w-3xl 2xl:max-w-4xl lg:ml-12 p-6 space-y-8">
                 <h1 className="text-4xl lg:text-6xl font-bold text-white mb-12 text-left">
                     About Us
                 </h1>

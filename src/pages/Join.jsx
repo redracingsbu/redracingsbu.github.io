@@ -83,7 +83,7 @@ function Join() {
       <Header />
       
       {/* SECTION 1: Intro / Join Text */}
-      <div className="pt-8 lg:pt-24 px-6 lg:px-12 max-w-2xl mx-auto lg:mx-0 lg:ml-12 p-6 rounded-lg space-y-8 bg-black/80 lg:bg-transparent backdrop-blur-sm lg:backdrop-blur-none">
+      <div className="pt-8 lg:pt-24 px-6 lg:px-12 max-w-3xl 2xl:max-w-4xl mx-auto lg:mx-0 lg:ml-12 p-6 rounded-lg space-y-8 bg-black/80 lg:bg-transparent backdrop-blur-sm lg:backdrop-blur-none">
         <h1 className="text-4xl lg:text-6xl font-bold text-white mb-12 drop-shadow-lg">
           Join the Pack
         </h1>
@@ -115,7 +115,7 @@ function Join() {
 
       {/* SECTION 2: Spring 2025 Schedule */}
       {/* Used a separate container with solid background for readability over complex bg */}
-      <div className="w-full py-30 px-6 lg:px-12 mt-20">
+      <div className="w-full py-30 px-6 lg:px-12 mt-36 2xl:mt-64">
         <h2 className="text-3xl lg:text-5xl font-bold text-white text-center mb-16">
           Spring 2025 Schedule
         </h2>
