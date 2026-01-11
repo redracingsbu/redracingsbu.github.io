@@ -11,7 +11,12 @@ const Team = lazy(() => import('./pages/Team.jsx'));
 const CarMeet = lazy(() => import('./pages/CarMeet.jsx'));
 
 const PageLoader = () => (
-  <div className="fixed inset-0 flex items-center justify-center bg-black">
+  <div
+    className="fixed inset-0 flex items-center justify-center bg-black"
+    role="status"
+    aria-live="polite"
+    aria-label="Loading"
+  >
     <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-red-500"></div>
   </div>
 );

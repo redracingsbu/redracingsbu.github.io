@@ -1,9 +1,16 @@
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
+import { CONTACT_EMAIL } from '../utils/socialLinks.js';
+
+function getRequiredError(value) {
+    if (!value || value.trim() === '') return 'This field is required';
+    return '';
+}
 
 function ContactForm() {
     const [formData, setFormData] = useState({
         firstName: '',
         lastName: '',
+
         topic: '',
         message: ''
     });
@@ -11,30 +18,26 @@ function ContactForm() {
     const [errors, setErrors] = useState({});
     const [touched, setTouched] = useState({});
 
-    const handleChange = ({ target: { name, value } }) => {
-        setFormData(prev => ({ ...prev, [name]: value }));
-        if (errors[name]) setErrors(prev => ({ ...prev, [name]: '' }));
-    };
+    const validateField = useCallback((name, value) => {
+        const error = getRequiredError(value);
 
-    const handleBlur = ({ target: { name } }) => {
-        setTouched(prev => ({ ...prev, [name]: true }));
-        validateField(name, formData[name]);
-    };
-
-    const validateField = (name, value) => {
-        let error = '';
-        
-        if (!value || value.trim() === '') {
-            error = 'This field is required';
-        }
-        
-        setErrors(prev => ({
+        setErrors((prev) => ({
             ...prev,
-            [name]: error
+            [name]: error,
         }));
-        
+
         return error;
-    };
+    }, []);
+
+    const handleChange = useCallback(({ target: { name, value } }) => {
+        setFormData((prev) => ({ ...prev, [name]: value }));
+        setErrors((prev) => (prev[name] ? { ...prev, [name]: '' } : prev));
+    }, []);
+
+    const handleBlur = useCallback(({ target: { name, value } }) => {
+        setTouched((prev) => ({ ...prev, [name]: true }));
+        validateField(name, value);
+    }, [validateField]);
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -55,9 +58,9 @@ function ContactForm() {
             const body = encodeURIComponent(
                 `Dear Sbu Red Racing Team,\n\n${formData.message}\n\nsincerely,\n${formData.firstName} ${formData.lastName}`
             );
-            
-            const mailtoLink = `mailto:fsae.sbu@gmail.com?subject=${subject}&body=${body}`;
-            
+
+            const mailtoLink = `mailto:${CONTACT_EMAIL}?subject=${subject}&body=${body}`;
+
             // Open mailto link
             window.location.href = mailtoLink;
         }
@@ -81,19 +84,30 @@ function ContactForm() {
         { name: 'message', label: 'Message', type: 'textarea', rows: 3 },
     ];
 
+    const gridFields = fields.filter((f) => f.grid);
+    const nonGridFields = fields.filter((f) => !f.grid);
+
     const renderField = ({ name, label, type, rows }) => {
         const showError = touched[name] && errors[name];
+        const controlId = `contact-${name}`;
+        const errorId = `contact-${name}-error`;
         const commonProps = {
+            id: controlId,
             name,
             value: formData[name],
             onChange: handleChange,
             onBlur: handleBlur,
             required: true,
+            'aria-invalid': Boolean(showError),
+            'aria-describedby': showError ? errorId : undefined,
         };
 
         return (
             <div className="relative">
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                <label
+                    htmlFor={controlId}
+                    className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
+                >
                     {label}
                 </label>
                 {type === 'textarea' ? (
@@ -110,7 +124,13 @@ function ContactForm() {
                     />
                 )}
                 {showError && (
-                    <p className="absolute text-red-500 text-xs mt-1">{errors[name]}</p>
+                    <p
+                        id={errorId}
+                        role="alert"
+                        className="absolute text-red-500 text-xs mt-1"
+                    >
+                        {errors[name]}
+                    </p>
                 )}
             </div>
         );
@@ -120,10 +140,10 @@ function ContactForm() {
         <div className="bg-[#191919] p-8 rounded-lg sticky top-4 self-start mb-8 lg:mb-0">
             <form onSubmit={handleSubmit} noValidate className="space-y-6">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    {fields.filter((f) => f.grid).map(renderField)}
+                    {gridFields.map(renderField)}
                 </div>
 
-                {fields.filter((f) => !f.grid).map(renderField)}
+                {nonGridFields.map(renderField)}
 
                 <button
                     type="submit"

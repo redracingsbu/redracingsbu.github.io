@@ -59,6 +59,18 @@
 
   .rr-body-muted { @apply text-lg lg:text-xl text-gray-200 leading-relaxed; }
 
+  .rr-footer { font-family: "Courier New", Courier, monospace; }
+
+  .rr-header-logo-img {
+    filter: brightness(0) saturate(100%) invert(17%) sepia(95%) saturate(7538%) hue-rotate(4deg)
+      brightness(89%) contrast(119%);
+    transition: filter 300ms ease-in-out;
+  }
+
+  .rr-header-logo:hover .rr-header-logo-img {
+    filter: invert(1) brightness(2);
+  }
+
   /*
     Home page helpers
 
@@ -91,6 +103,8 @@
   }
 
   .rr-home-arrow { animation: rr-home-arrow-float 4s infinite ease-in-out; }
+
+  .rr-home-arrow-delay { animation-delay: 0.2s; }
 
   @media (min-width: 1024px) {
     .rr-join-coilovers-bg {

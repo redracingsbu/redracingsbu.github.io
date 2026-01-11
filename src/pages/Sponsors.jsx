@@ -8,9 +8,14 @@ import SiemensLogo from '../assets/sponsors/SiemensLogo.svg';
 import KISSsoftLogo from '../assets/sponsors/KISSsoftLogo.svg';
 import HumaneticsLogo from '../assets/sponsors/HumaneticsLogo.png';
 import SensataLogo from '../assets/sponsors/SensataLogo.png';
-import Header from '../components/Header.jsx';
-import Footer from '../components/Footer.jsx';
+import PageLayout from '../components/PageLayout.jsx';
 import { Link } from 'react-router-dom';
+
+const BUTTON_CLASS_NAME =
+  'rr-btn-primary rr-btn-lg w-full whitespace-nowrap px-4 flex items-center justify-center';
+
+const TIER_ROW_CLASS_NAME =
+  'flex flex-col lg:flex-row justify-center items-center space-y-12 lg:space-y-0 lg:space-x-8 xl:space-x-16 px-6';
 
 const sponsorCtas = [
   {
@@ -122,93 +127,86 @@ const sponsorTiers = [
   },
 ];
 
-function Sponsors() {
-  const buttonClassName = 'rr-btn-primary rr-btn-lg w-full whitespace-nowrap px-4 flex items-center justify-center';
-  
-  const tierRowClassName =
-    'flex flex-col lg:flex-row justify-center items-center space-y-12 lg:space-y-0 lg:space-x-8 xl:space-x-16 px-6';
-
-  const renderCta = ({ key, type, to, href, label }) =>
-    type === 'internal' ? (
-      <Link key={key} to={to} className={buttonClassName}>
-        {label}
-      </Link>
-    ) : (
-      <a
-        key={key}
-        href={href}
-        className={buttonClassName}
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        {label}
-      </a>
-    );
-
-  const renderTier = ({ key, title, rows }) => (
-    <section key={key} aria-labelledby={`tier-${key}`}>
-      <div className="bg-zinc-700 w-screen text-center py-3 bg-gray text-white text-3xl lg:text-5xl font-bold">
-        <h2 id={`tier-${key}`}>{title}</h2>
-      </div>
-
-      <div className="space-y-12 py-12">
-        {rows.map((row, rowIndex) => (
-          <div key={`${key}-row-${rowIndex}`} className={tierRowClassName}>
-            {row.map((logo) => (
-              <img
-                key={`${key}-${logo.alt}`}
-                src={logo.src}
-                alt={logo.alt}
-                className={logo.className}
-                loading="lazy"
-                decoding="async"
-              />
-            ))}
-          </div>
-        ))}
-      </div>
-    </section>
+const renderCta = ({ key, type, to, href, label }) =>
+  type === 'internal' ? (
+    <Link key={key} to={to} className={BUTTON_CLASS_NAME}>
+      {label}
+    </Link>
+  ) : (
+    <a
+      key={key}
+      href={href}
+      className={BUTTON_CLASS_NAME}
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      {label}
+    </a>
   );
 
-  return (
-    <div className="rr-page">
-      <Header />
-
-      <main className="flex flex-1 flex-col" id="main-content">
-        <div className="flex flex-1 items-start justify-center">
-          <div className="rr-page-pad max-w-5xl p-6 rounded-lg space-y-8 w-full">
-            <h1 className="rr-h1 mb-12 text-center">
-              Thank you to our Partners!
-            </h1>
-
-            <div className="space-y-8 rr-body text-left">
-              <p>
-                Your partnership will directly contribute to the design, fabrication,
-                and testing of Stony Brook University's first ever FSAE car – a
-                milestone achievement for both our team and the institution.
-              </p>
-              <p>
-                Every contribution plays a crucial role in bringing this dream to
-                life and laying the foundation for our team’s long-term success.
-              </p>
-            </div>
-
-            <nav
-              className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-16 pt-12 w-full"
-              aria-label="Sponsor actions"
-            >
-              {sponsorCtas.map(renderCta)}
-            </nav>
-          </div>
-        </div>
-
-        <div className="flex flex-col items-center justify-center space-y-4 mt-24 lg:mt-[10vh]">
-          {sponsorTiers.map(renderTier)}
-        </div>
-      </main>
-
-      <Footer />
+const renderTier = ({ key, title, rows }) => (
+  <section key={key} aria-labelledby={`tier-${key}`}>
+    <div className="bg-zinc-700 w-screen text-center py-3 bg-gray text-white text-3xl lg:text-5xl font-bold">
+      <h2 id={`tier-${key}`}>{title}</h2>
     </div>
+
+    <div className="space-y-12 py-12">
+      {rows.map((row, rowIndex) => (
+        <div key={`${key}-row-${rowIndex}`} className={TIER_ROW_CLASS_NAME}>
+          {row.map((logo) => (
+            <img
+              key={`${key}-${logo.alt}`}
+              src={logo.src}
+              alt={logo.alt}
+              className={logo.className}
+              loading="lazy"
+              decoding="async"
+            />
+          ))}
+        </div>
+      ))}
+    </div>
+  </section>
+);
+
+function Sponsors() {
+  return (
+    <PageLayout
+      wrapperClassName="rr-page"
+      mainClassName="flex flex-1 flex-col"
+      mainProps={{ id: 'main-content' }}
+    >
+      <div className="flex flex-1 items-start justify-center">
+        <div className="rr-page-pad max-w-5xl p-6 rounded-lg space-y-8 w-full">
+          <h1 className="rr-h1 mb-12 text-center">
+            Thank you to our Partners!
+          </h1>
+
+          <div className="space-y-8 rr-body text-left">
+            <p>
+              Your partnership will directly contribute to the design, fabrication,
+              and testing of Stony Brook University's first ever FSAE car – a
+              milestone achievement for both our team and the institution.
+            </p>
+            <p>
+              Every contribution plays a crucial role in bringing this dream to
+              life and laying the foundation for our team’s long-term success.
+            </p>
+          </div>
+
+          <nav
+            className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-16 pt-12 w-full"
+            aria-label="Sponsor actions"
+          >
+            {sponsorCtas.map(renderCta)}
+          </nav>
+        </div>
+      </div>
+
+      <div className="flex flex-col items-center justify-center space-y-4 mt-24 lg:mt-[10vh]">
+        {sponsorTiers.map(renderTier)}
+      </div>
+    </PageLayout>
   );
 }
 

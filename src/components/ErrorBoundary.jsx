@@ -16,13 +16,12 @@ class ErrorBoundary extends Component {
 
   render() {
     if (this.state.hasError) {
-      const pageClassName =
-        'bg-black min-h-screen flex items-center justify-center px-6';
+      const pageClassName = 'rr-page items-center justify-center px-6';
       const cardClassName = 'max-w-xl w-full text-center text-white space-y-6';
 
       return (
         <div className={pageClassName}>
-          <div className={cardClassName}>
+          <div className={cardClassName} role="alert" aria-live="assertive">
             <h1 className="text-3xl lg:text-5xl font-bold">Something went wrong</h1>
             <p className="text-lg text-gray-200">
               Please refresh the page. If the issue persists, reach out to us.

@@ -1,5 +1,4 @@
-import Header from '../components/Header.jsx';
-import Footer from '../components/Footer.jsx';
+import PageLayout from '../components/PageLayout.jsx';
 
 // Data for Schedule
 const scheduleItems = [
@@ -55,10 +54,10 @@ const subsystems = [
 
 function Join() {
   return (
-    <div
-      className="rr-page rr-join-coilovers-bg"
+    <PageLayout
+      wrapperClassName="rr-page rr-join-coilovers-bg"
+      mainClassName="flex-1 flex flex-col"
     >
-      <Header />
       
       {/* SECTION 1: Intro / Join Text */}
       <div className="flex-1 flex items-start rr-page-pad">
@@ -147,8 +146,7 @@ function Join() {
         </div>
       </div>
 
-      <Footer />
-    </div>
+    </PageLayout>
   );
 }
 
