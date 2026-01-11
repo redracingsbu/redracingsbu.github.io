@@ -1,8 +1,104 @@
 @import "tailwindcss";
 
 @layer base {
-  html {
-  scrollbar-gutter: stable both-edges;
-  background-color: black;
+  html { scrollbar-gutter: stable both-edges; background-color: black; }
+}
+
+@layer components {
+  /*
+    Reusable Tailwind component classes (project-specific)
+
+    Why this exists:
+    - This codebase repeats a few long Tailwind class strings (especially red CTA buttons).
+    - Repeating those strings makes changes error-prone and inconsistent.
+    - These classes keep the exact same design while letting pages/components stay smaller.
+
+    How to use:
+    - Prefer adding one of these classes instead of retyping the full Tailwind string.
+    - You can still add additional Tailwind utilities next to these classes for one-off tweaks.
+
+    Naming convention:
+    - rr-* prefix for "Red Racing" to avoid collisions with Tailwind utilities.
+  */
+
+  /*
+    NOTE: Tailwind does not allow @apply to reference other custom classes.
+    So rr-btn-primary/strong inline the shared "base" utilities directly.
+  */
+
+  /* Primary CTA (red) used across pages */
+  .rr-btn-primary { @apply inline-block font-bold uppercase tracking-wide text-white transition-all duration-200 transform hover:scale-105 active:scale-95 text-center focus:outline-none focus-visible:ring-2 focus-visible:ring-red-400 bg-red-500 hover:bg-red-600; }
+
+  /* Common sizing variants */
+  .rr-btn-md { @apply py-3 px-6 text-xl; }
+
+  .rr-btn-lg { @apply py-5 px-10 text-xl min-w-[280px] tracking-wider; }
+
+  .rr-social-link { @apply text-gray-400 hover:text-gray-200 transition-colors duration-200; }
+
+  /*
+    Page layout helpers
+
+    Goal:
+    - Standardize the "default page" spacing so new pages start consistent.
+
+    Usage:
+    - Wrap pages with: <div className="rr-page"> ... </div>
+    - Use rr-page-pad on the main content container that needs the common padding.
+  */
+
+  .rr-page { @apply bg-black min-h-screen flex flex-col; }
+
+  .rr-page-pad { @apply pt-8 lg:pt-24 px-6 lg:px-12; }
+
+  .rr-h1 { @apply text-4xl lg:text-6xl font-bold text-white; }
+
+  .rr-h2-section { @apply text-3xl lg:text-5xl font-bold text-white text-center mb-16; }
+
+  .rr-body { @apply text-lg lg:text-xl text-white leading-relaxed; }
+
+  .rr-body-muted { @apply text-lg lg:text-xl text-gray-200 leading-relaxed; }
+
+  /*
+    Home page helpers
+
+    Goal:
+    - Remove inline <style> from Home.jsx.
+    - Avoid global selectors like ".fixed" so other fixed elements aren't affected.
+
+    Usage:
+    - Apply rr-home-parallax to the fixed background div.
+    - Set CSS variables via the style prop:
+      style={{ '--rr-home-bg-mobile': `url(${carPortrait})`, '--rr-home-bg-desktop': `url(${carLandscape})` }}
+  */
+
+  .rr-home-parallax { background-size: cover; background-position: center; background-repeat: no-repeat; background-image: var(--rr-home-bg-mobile); }
+
+  @media (min-width: 768px) {
+    .rr-home-parallax { background-image: var(--rr-home-bg-desktop); }
+  }
+
+  @keyframes rr-home-arrow-float {
+    0%,
+    100% {
+      transform: translateY(0);
+      opacity: 0.5;
+    }
+    50% {
+      transform: translateY(10px);
+      opacity: 1;
+    }
+  }
+
+  .rr-home-arrow { animation: rr-home-arrow-float 4s infinite ease-in-out; }
+
+  @media (min-width: 1024px) {
+    .rr-join-coilovers-bg {
+      background-image: url('./assets/join/coilovers.webp');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+    }
   }
 }

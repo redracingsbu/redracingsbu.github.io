@@ -11,27 +11,13 @@ function ContactForm() {
     const [errors, setErrors] = useState({});
     const [touched, setTouched] = useState({});
 
-    const handleChange = (e) => {
-        const { name, value } = e.target;
-        setFormData({
-            ...formData,
-            [name]: value
-        });
-        
-        if (errors[name]) {
-            setErrors({
-                ...errors,
-                [name]: ''
-            });
-        }
+    const handleChange = ({ target: { name, value } }) => {
+        setFormData(prev => ({ ...prev, [name]: value }));
+        if (errors[name]) setErrors(prev => ({ ...prev, [name]: '' }));
     };
 
-    const handleBlur = (e) => {
-        const { name } = e.target;
-        setTouched({
-            ...touched,
-            [name]: true
-        });
+    const handleBlur = ({ target: { name } }) => {
+        setTouched(prev => ({ ...prev, [name]: true }));
         validateField(name, formData[name]);
     };
 
@@ -52,19 +38,17 @@ function ContactForm() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        
+
+        const keys = Object.keys(formData);
         const newErrors = {};
-        Object.keys(formData).forEach(key => {
+
+        keys.forEach((key) => {
             const error = validateField(key, formData[key]);
             if (error) newErrors[key] = error;
         });
-        
-        const allTouched = {};
-        Object.keys(formData).forEach(key => {
-            allTouched[key] = true;
-        });
-        setTouched(allTouched);
-        
+
+        setTouched(Object.fromEntries(keys.map((key) => [key, true])));
+
         if (Object.keys(newErrors).length === 0) {
             // Create mailto link
             const subject = encodeURIComponent(formData.topic);
@@ -79,103 +63,71 @@ function ContactForm() {
         }
     };
 
-    const getFieldClasses = (fieldName) => {
+    const inputBaseClassName =
+        'w-full px-1 border-b-2 bg-transparent focus:outline-none transition-colors duration-200 text-gray-900 dark:text-white';
+    const errorClassName = 'border-red-500 focus:border-red-500';
+    const okClassName = 'border-gray-300 dark:border-[#808080] focus:border-red-500';
+
+    const getControlClasses = (fieldName, { isTextarea } = {}) => {
         const hasError = touched[fieldName] && errors[fieldName];
-        return `w-full px-1 py-3 border-b-2 bg-transparent focus:outline-none transition-colors duration-200 text-gray-900 dark:text-white ${
-            hasError 
-                ? 'border-red-500 focus:border-red-500' 
-                : 'border-gray-300 dark:border-[#808080] focus:border-red-500'
-        }`;
+        const padding = isTextarea ? 'py-2 resize-none' : 'py-3';
+        return `${inputBaseClassName} ${padding} ${hasError ? errorClassName : okClassName}`;
     };
 
-    const getTextareaClasses = (fieldName) => {
-        const hasError = touched[fieldName] && errors[fieldName];
-        return `w-full px-1 py-2 border-b-2 bg-transparent focus:outline-none transition-colors duration-200 text-gray-900 dark:text-white resize-none ${
-            hasError 
-                ? 'border-red-500 focus:border-red-500' 
-                : 'border-gray-300 dark:border-[#808080] focus:border-red-500'
-        }`;
+    const fields = [
+        { name: 'firstName', label: 'First', type: 'text', grid: true },
+        { name: 'lastName', label: 'Last', type: 'text', grid: true },
+        { name: 'topic', label: 'Topic', type: 'text' },
+        { name: 'message', label: 'Message', type: 'textarea', rows: 3 },
+    ];
+
+    const renderField = ({ name, label, type, rows }) => {
+        const showError = touched[name] && errors[name];
+        const commonProps = {
+            name,
+            value: formData[name],
+            onChange: handleChange,
+            onBlur: handleBlur,
+            required: true,
+        };
+
+        return (
+            <div className="relative">
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                    {label}
+                </label>
+                {type === 'textarea' ? (
+                    <textarea
+                        {...commonProps}
+                        rows={rows}
+                        className={getControlClasses(name, { isTextarea: true })}
+                    />
+                ) : (
+                    <input
+                        {...commonProps}
+                        type={type}
+                        className={getControlClasses(name)}
+                    />
+                )}
+                {showError && (
+                    <p className="absolute text-red-500 text-xs mt-1">{errors[name]}</p>
+                )}
+            </div>
+        );
     };
 
     return (
         <div className="bg-[#191919] p-8 rounded-lg sticky top-4 self-start mb-8 lg:mb-0">
             <form onSubmit={handleSubmit} noValidate className="space-y-6">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div className="relative">
-                        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                            First
-                        </label>
-                        <input
-                            type="text"
-                            name="firstName"
-                            value={formData.firstName}
-                            onChange={handleChange}
-                            onBlur={handleBlur}
-                            className={getFieldClasses('firstName')}
-                            required
-                        />
-                        {touched.firstName && errors.firstName && (
-                            <p className="absolute text-red-500 text-xs mt-1">{errors.firstName}</p>
-                        )}
-                    </div>
-                    <div className="relative">
-                        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                            Last
-                        </label>
-                        <input
-                            type="text"
-                            name="lastName"
-                            value={formData.lastName}
-                            onChange={handleChange}
-                            onBlur={handleBlur}
-                            className={getFieldClasses('lastName')}
-                            required
-                        />
-                        {touched.lastName && errors.lastName && (
-                            <p className="absolute text-red-500 text-xs mt-1">{errors.lastName}</p>
-                        )}
-                    </div>
+                    {fields.filter((f) => f.grid).map(renderField)}
                 </div>
 
-                <div className="relative">
-                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                        Topic
-                    </label>
-                    <input
-                        type="text"
-                        name="topic"
-                        value={formData.topic}
-                        onChange={handleChange}
-                        onBlur={handleBlur}
-                        className={getFieldClasses('topic')}
-                        required
-                    />
-                    {touched.topic && errors.topic && (
-                        <p className="absolute text-red-500 text-xs mt-1">{errors.topic}</p>
-                    )}
-                </div>
-
-                <div className="relative">
-                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                        Message
-                    </label>
-                    <textarea
-                        name="message"
-                        value={formData.message}
-                        onChange={handleChange}
-                        onBlur={handleBlur}
-                        rows="3"
-                        className={getTextareaClasses('message')}
-                        required
-                    />
-                    {touched.message && errors.message && (
-                        <p className="absolute text-red-500 text-xs mt-1">{errors.message}</p>
-                    )}
-                </div>
+                {fields.filter((f) => !f.grid).map(renderField)}
 
                 <button
                     type="submit"
-                    className="bg-red-500 hover:bg-red-600 text-white font-bold py-3 px-8 text-lg uppercase tracking-wide transition-colors duration-200"
+                    className="rr-btn-primary py-3 px-8 text-lg"
                 >
                     SEND
                 </button>

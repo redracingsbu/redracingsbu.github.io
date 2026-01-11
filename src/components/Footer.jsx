@@ -1,42 +1,49 @@
-import discordIcon from '../assets/discord.svg';
-import instagramIcon from '../assets/instagram.svg';
-import linkedinIcon from '../assets/linkedin.svg';
+import discordIcon from '../assets/footer/discord.svg';
+import instagramIcon from '../assets/footer/instagram.svg';
+import linkedinIcon from '../assets/footer/linkedin.svg';
 
 function Footer() {
-    return(
+    const socialLinks = [
+        {
+            href: 'https://www.linkedin.com/company/redracingsbufsae/',
+            icon: linkedinIcon,
+            alt: 'LinkedIn',
+        },
+        {
+            href: 'https://www.instagram.com/sburedracing/',
+            icon: instagramIcon,
+            alt: 'Instagram',
+        },
+        {
+            href: 'https://discord.gg/K2RYYcz5jA',
+            icon: discordIcon,
+            alt: 'Discord',
+        },
+    ];
+
+    const footerStyle = { fontFamily: '"Courier New", Courier, monospace' };
+
+    return (
         <footer
             className="w-full text-center font-normal text-white z-49 relative mt-auto"
-            style={{ fontFamily: '"Courier New", Courier, monospace'}}
+            style={footerStyle}
         >
             <div className="flex justify-center space-x-6 mb-2">
-                <a 
-                    href="https://www.linkedin.com/company/redracingsbufsae/" 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    className="text-gray-400 hover:text-gray-200 transition-colors duration-200"
-                >
-                    <img src={linkedinIcon} alt="LinkedIn" className="w-4 h-4" />
-                </a>
-                <a 
-                    href="https://www.instagram.com/sburedracing/" 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    className="text-gray-400 hover:text-gray-200 transition-colors duration-200"
-                >
-                    <img src={instagramIcon} alt="Instagram" className="w-4 h-4" />
-                </a>
-                <a 
-                    href="https://discord.gg/K2RYYcz5jA" 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    className="text-gray-400 hover:text-gray-200 transition-colors duration-200"
-                >
-                    <img src={discordIcon} alt="Discord" className="w-4 h-4" />
-                </a>
+                {socialLinks.map(({ href, icon, alt }) => (
+                    <a
+                        key={alt}
+                        href={href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="rr-social-link"
+                    >
+                        <img src={icon} alt={alt} className="w-4 h-4" />
+                    </a>
+                ))}
             </div>
-            <div>fsae.sbu@gmail.com</div>
+            <div className="mb-2">fsae.sbu@gmail.com</div>
         </footer>
-    )
+    );
 }
 
-export default Footer
+export default Footer;

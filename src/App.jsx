@@ -1,13 +1,14 @@
 import { lazy, Suspense } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
+import ErrorBoundary from './components/ErrorBoundary.jsx';
 
+// Existing pages
 const Home = lazy(() => import('./pages/Home.jsx'));
-const About = lazy(() => import('./pages/About.jsx'));
 const Join = lazy(() => import('./pages/Join.jsx'));
 const Sponsors = lazy(() => import('./pages/Sponsors.jsx'));
 const ContactUs = lazy(() => import('./pages/ContactUs.jsx'));
-const Competition = lazy(() => import('./pages/Competition.jsx'));
-const Tiers = lazy(() => import('./pages/Tiers.jsx'));
+const Team = lazy(() => import('./pages/Team.jsx'));
+const CarMeet = lazy(() => import('./pages/CarMeet.jsx'));
 
 const PageLoader = () => (
   <div className="fixed inset-0 flex items-center justify-center bg-black">
@@ -17,18 +18,22 @@ const PageLoader = () => (
 
 function App() {
   return (
-        <Suspense fallback={<PageLoader />}>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/join" element={<Join />} />
-            <Route path="/sponsors" element={<Sponsors />} />
-            <Route path="/contact" element={<ContactUs />} />
-            <Route path="/fsae" element={<Competition />} />
-            <Route path="/tiers" element={<Tiers />} />
-            <Route path="*" element={<Navigate to="/" />} />
-          </Routes>
-        </Suspense>
+    <ErrorBoundary>
+      <Suspense fallback={<PageLoader />}>
+        <Routes>
+          {/* Main Routes matching Header */}
+          <Route path="/" element={<Home />} />
+          <Route path="/team" element={<Team />} />
+          <Route path="/join" element={<Join />} />
+          <Route path="/carmeet" element={<CarMeet />} />
+          <Route path="/sponsors" element={<Sponsors />} />
+          <Route path="/contact" element={<ContactUs />} />
+          
+          {/* Fallback */}
+          <Route path="*" element={<Navigate to="/" />} />
+        </Routes>
+      </Suspense>
+    </ErrorBoundary>
   );
 }
 

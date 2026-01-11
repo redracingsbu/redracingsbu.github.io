@@ -1,5 +1,3 @@
-import { useState, useEffect } from 'react';
-import coilovers from '../assets/coilovers.webp';
 import Header from '../components/Header.jsx';
 import Footer from '../components/Footer.jsx';
 
@@ -56,71 +54,53 @@ const subsystems = [
 ];
 
 function Join() {
-  const [isMobile, setIsMobile] = useState(window.innerWidth < 1024);
-
-  useEffect(() => {
-    const handleResize = () => {
-      setIsMobile(window.innerWidth < 1024);
-    };
-
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
-
-  const desktopBackgroundStyle = {
-    backgroundImage: `url(${coilovers})`,
-    backgroundSize: 'cover',
-    backgroundPosition: 'center',
-    backgroundRepeat: 'no-repeat',
-    backgroundAttachment: 'fixed', // Adds a slight parallax feel
-  };
-
   return (
     <div
-      className="min-h-screen flex flex-col bg-black"
-      style={!isMobile ? desktopBackgroundStyle : {}}
+      className="rr-page rr-join-coilovers-bg"
     >
       <Header />
       
       {/* SECTION 1: Intro / Join Text */}
-      <div className="pt-8 lg:pt-24 px-6 lg:px-12 max-w-3xl 2xl:max-w-4xl mx-auto lg:mx-0 lg:ml-12 p-6 rounded-lg space-y-8 bg-black/80 lg:bg-transparent backdrop-blur-sm lg:backdrop-blur-none">
-        <h1 className="text-4xl lg:text-6xl font-bold text-white mb-12 drop-shadow-lg">
-          Join the Pack
-        </h1>
+      <div className="flex-1 flex items-start rr-page-pad">
+        <div className="max-w-2xl 2xl:max-w-3xl mx-auto lg:mx-0 lg:ml-12 rounded-lg space-y-8 bg-black/80 lg:bg-transparent backdrop-blur-sm lg:backdrop-blur-none">
+          <h1 className="rr-h1 mb-12 drop-shadow-lg">
+            Join the Pack
+          </h1>
 
-        <div className="text-lg lg:text-xl text-white leading-relaxed space-y-6 drop-shadow-md">
-          <p>
-            Interested in joining the team? We welcome all students that have a
-            passion for building race cars, or are automotive fans in general.
-          </p>
-          <p>
-            Check out our Instagram page for general information about events.
-          </p>
-          <p>
-            To stay 100% up to date with meeting times and team plans, join our Discord:
-          </p>
-        </div>
+          <div className="rr-body space-y-6 drop-shadow-md">
+            <p>
+              Interested in joining the team? We welcome all students that have a
+              passion for building race cars, or are automotive fans in general.
+            </p>
+            <p>
+              Check out our Instagram page for general information about events.
+            </p>
+            <p>
+              To stay 100% up to date with meeting times and team plans, join our Discord:
+            </p>
+          </div>
 
-        <div className="pt-4">
-          <a
-            href="https://discord.gg/K2RYYcz5jA"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-block bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-8 text-xl lg:text-2xl uppercase tracking-wide transition-all duration-200 transform hover:scale-105 shadow-lg"
-          >
-            Discord
-          </a>
+          <div className="pt-4">
+            <a
+              href="https://discord.gg/K2RYYcz5jA"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="rr-btn-primary py-3 px-8 text-xl lg:text-2xl transition-all duration-200 transform hover:scale-105 shadow-lg"
+            >
+              Discord
+            </a>
+          </div>
         </div>
       </div>
 
       {/* SECTION 2: Spring 2025 Schedule */}
       {/* Used a separate container with solid background for readability over complex bg */}
       <div className="w-full py-30 px-6 lg:px-12 mt-36 2xl:mt-64">
-        <h2 className="text-3xl lg:text-5xl font-bold text-white text-center mb-16">
+        <h2 className="rr-h2-section">
           Spring 2025 Schedule
         </h2>
         
-        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {scheduleItems.map((item, index) => (
             <div 
               key={index} 
@@ -141,11 +121,11 @@ function Join() {
 
       {/* SECTION 3: Subsystem Breakdown */}
       <div className="w-full pb-24 px-6 lg:px-12 pt-8">
-        <h2 className="text-3xl lg:text-5xl font-bold text-white text-center mb-16">
+        <h2 className="rr-h2-section">
           Subsystem Breakdown
         </h2>
 
-        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6">
           {subsystems.map((sub, index) => (
             <div
               key={index}

@@ -1,63 +1,67 @@
-import { useRef } from 'react';
-import carLandscape from '../assets/carlandscape.webp';
-import carPortrait from '../assets/carportrait.webp';
+import { useCallback, useRef, useState, useEffect } from 'react';
+import carLandscape from '../assets/home/carlandscape.webp';
+import carPortrait from '../assets/home/carportrait.webp';
+import missionPicture from '../assets/home/homepagetent.webp';
+import helmetImage from '../assets/home/helmet.webp';
 import Header from '../components/Header.jsx';
 import Footer from '../components/Footer.jsx';
-import missionPicture from '../assets/homepagetent.webp';
-import About from './About.jsx';
 
 function Home() {
   const missionRef = useRef(null);
+  const [scrollOpacity, setScrollOpacity] = useState(1);
 
-  const scrollToMission = () => {
-    missionRef.current?.scrollIntoView({ behavior: 'smooth' });
-  };
+  // Scroll listener to calculate opacity based on scroll position
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollY = window.scrollY;
+      const windowHeight = window.innerHeight;
+      
+      // Calculate opacity: 1 at top, 0 when scrolled 50% down the viewport
+      const newOpacity = Math.max(0, 1 - (scrollY / (windowHeight * 0.6)));
+      setScrollOpacity(newOpacity);
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const scrollToMission = useCallback(() => {
+    if (missionRef.current) {
+      const elementPosition = missionRef.current.getBoundingClientRect().top + window.scrollY;
+      const offset = window.innerWidth < 768 ? 40 : 0; 
+      const offsetPosition = elementPosition - offset;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      });
+    }
+  }, []);
 
   return (
     <>
-      {/* 1. Global Fixed Header (Kept fixed as requested previously) */}
-      <div className="fixed top-0 left-0 w-full z-50 bg-black">
-        <Header />
-      </div>
+      <Header />
 
       {/* 2. Fixed Parallax Background */}
       <div 
-        className="fixed top-0 left-0 w-full h-screen -z-10 bg-black"
+        className="rr-home-parallax fixed top-0 left-0 w-full h-screen -z-10 bg-black"
         style={{
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          backgroundRepeat: 'no-repeat',
-          backgroundImage: `url(${carPortrait})`,
+          '--rr-home-bg-mobile': `url(${carPortrait})`,
+          '--rr-home-bg-desktop': `url(${carLandscape})`,
+          opacity: scrollOpacity
         }}
-      >
-        <style>{`
-          @media (min-width: 768px) {
-            .fixed {
-              background-image: url(${carLandscape}) !important;
-            }
-          }
-          /* Custom Animation Definition */
-          @keyframes arrowFloat {
-            0%, 100% { transform: translateY(0); opacity: 0.5; }
-            50% { transform: translateY(10px); opacity: 1; }
-          }
-          .animate-arrow {
-            animation: arrowFloat 4s infinite ease-in-out;
-          }
-          .animate-arrow-delay {
-            animation: arrowFloat 4s infinite ease-in-out;
-            animation-delay: 0.2s; /* Slight delay for the second arrow */
-          }
-        `}</style>
-      </div>
+      />
 
       {/* 3. Main Scrollable Container */}
       <div className="relative w-full">
         
         {/* Transparent Window (Initial View) */}
-        <div className="min-h-screen flex flex-col relative pointer-events-none">
+        <div className="min-h-[calc(100vh-4rem)] flex flex-col relative pointer-events-none">
           {/* Arrow Container at Bottom */}
-          <div className="flex-grow flex items-end justify-center pb-12 pointer-events-auto">
+          <div 
+            className="flex-grow flex items-end justify-center pb-20 pointer-events-auto transition-opacity duration-300 ease-out"
+            style={{ opacity: scrollOpacity }}
+          >
             <button 
               onClick={scrollToMission}
               className="flex flex-col items-center justify-center cursor-pointer transition-transform hover:scale-110 focus:outline-none"
@@ -65,7 +69,7 @@ function Home() {
             >
               {/* Double V Arrow */}
               <svg 
-                className="w-10 h-10 text-white animate-arrow drop-shadow-lg" 
+                className="w-10 h-10 text-white rr-home-arrow drop-shadow-lg" 
                 fill="none" 
                 stroke="currentColor" 
                 viewBox="0 0 24 24"
@@ -73,7 +77,8 @@ function Home() {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
               </svg>
               <svg 
-                className="w-10 h-10 text-white animate-arrow-delay -mt-6 drop-shadow-lg" 
+                className="w-10 h-10 text-white rr-home-arrow -mt-6 drop-shadow-lg" 
+                style={{ animationDelay: '0.2s' }}
                 fill="none" 
                 stroke="currentColor" 
                 viewBox="0 0 24 24"
@@ -84,35 +89,30 @@ function Home() {
           </div>
         </div>
 
-        {/* Content Section (Styled exactly like ContactUs) */}
-        {/* We use bg-black to cover the parallax image when scrolling */}
+        {/* Content Section (Mission) */}
         <section 
           ref={missionRef} 
-          className="bg-black text-white relative z-10 w-full"
+          className="bg-black text-white relative z-10 w-full shadow-[0_-50px_100px_rgba(0,0,0,1)]"
         >
-          {/* Match top level padding from ContactUs: pt-8 lg:pt-24 px-6 lg:px-12 */}
-          <div className="flex items-start pt-8 lg:pt-24 px-6 lg:px-12 pb-24">
-            
-            {/* Match Grid Layout: grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 */}
+          <div className="flex items-start rr-page-pad pb-24">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-36 w-full max-w-[1400px] mx-auto">
               
-              {/* Left Column: Image (Matches Layout) */}
-              <div className="max-w-4xl mx-auto lg:mx-0 lg:ml-12 w-full">
-                 <img 
-                    src={missionPicture}
-                    alt="Red Racing Team" 
-                    className="w-full h-auto object-cover"
-                  />
+              {/* Left Column: Image */}
+              <div className="max-w-3xl mx-auto lg:mx-0 lg:ml-12 w-full">
+                <img 
+                  src={missionPicture}
+                  alt="Red Racing Team" 
+                  className="w-full h-auto object-cover"
+                />
               </div>
 
               {/* Right Column: Text Content */}
-              <div className="max-w-4xl lg:mx-0 lg:mr-12 flex flex-col justify-center">
-                {/* Match Header Size: text-4xl lg:text-6xl */}
-                <h1 className="text-4xl lg:text-6xl font-bold text-white mb-8">
+              <div className="max-w-3xl lg:mx-0 lg:mr-12 flex flex-col justify-center">
+                <h1 className="rr-h1 mb-8">
                   Our Mission
                 </h1>
                 
-                <div className="space-y-6 text-lg lg:text-xl text-white leading-relaxed">
+                <div className="space-y-6 rr-body">
                   <p>
                     RedRacing at Stony Brook University aims to prepare undergraduate 
                     and graduate students with an opportunity to engage in a range of 
@@ -132,7 +132,46 @@ function Home() {
           </div>
         </section>
         
-        <About />
+        {/* About Section (Merged directly) */}
+        <div className="bg-black w-full mb-2 relative z-10">
+          <div className="flex-1 flex flex-col lg:flex-row">
+            
+            {/* Text Column */}
+            <div className="rr-page-pad max-w-2xl 2xl:max-w-3xl lg:ml-12 p-6">
+              <h1 className="rr-h1 mb-12 text-left">
+                About Us
+              </h1>
+              
+              <div className="space-y-4 rr-body">
+                <p>
+                  RedRacing is Stony Brook's First Formula SAE team, founded in 2025 in a dorm room by a group of new 
+                  engineering students who shared a love for Formula 1 and high-performance vehicles.  
+                </p>
+                
+                <p>
+                  After joining the existing Baja SAE team, we realized two things: we wanted to pursue the technical 
+                  challenge of a true formula-style car, and we wanted to build a team where students could learn 
+                  hands-on from day one.  
+                </p>
+                
+                <p>
+                  What started as a few freshmen with an idea has evolved into a cross-disciplinary organization of 
+                  over 30 mechanical, electrical, computer, software, physics, chemistry, and business students 
+                  united around one goal: design, build, and compete with a Formula SAE vehicle on the international stage.
+                </p>
+              </div>
+            </div>
+
+            <div className="w-full lg:w-1/2 p-6 lg:pr-12 flex justify-center lg:mt-24">
+              <img 
+                src={helmetImage} 
+                alt="Red Racing Helmet" 
+                className="w-full max-w-lg h-auto object-cover rounded-lg shadow-lg"
+              />
+            </div>
+
+          </div>
+        </div>
 
         {/* Footer */}
         <div className="bg-black relative z-10">
