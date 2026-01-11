@@ -1,13 +1,13 @@
 import SolidWorksLogo from '../assets/sponsors/SolidWorksLogo.svg';
 import AnsysLogo from '../assets/sponsors/AnsysLogo.svg';
 import KenestoLogo from '../assets/sponsors/KenestoLogo.svg';
-import RapidharnessLogo from '../assets/sponsors/RapidHarnessLogo.png';
+import RapidharnessLogo from '../assets/sponsors/RapidHarnessLogo.webp';
 import AltiumLogo from '../assets/sponsors/AltiumLogo.svg';
 import AceControlsLogo from '../assets/sponsors/AceLogo.svg';
 import SiemensLogo from '../assets/sponsors/SiemensLogo.svg';
 import KISSsoftLogo from '../assets/sponsors/KISSsoftLogo.svg';
-import HumaneticsLogo from '../assets/sponsors/HumaneticsLogo.png';
-import SensataLogo from '../assets/sponsors/SensataLogo.png';
+import HumaneticsLogo from '../assets/sponsors/HumaneticsLogo.webp';
+import SensataLogo from '../assets/sponsors/SensataLogo.webp';
 import PageLayout from '../components/PageLayout.jsx';
 import { Link } from 'react-router-dom';
 

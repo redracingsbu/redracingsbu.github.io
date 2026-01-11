@@ -3,24 +3,30 @@ import react from '@vitejs/plugin-react'
 import tailwindcss from '@tailwindcss/vite'
 
 export default defineConfig({
-  plugins: [react({
-    babel: {
-      plugins: [
-        ["babel-plugin-react-compiler", {}]
-      ]
-    }
-  }),
-  tailwindcss(),
+  plugins: [
+    react({
+      babel: {
+        plugins: [
+          ["babel-plugin-react-compiler", {}]
+        ]
+      }
+    }),
+    tailwindcss(),
   ],
   base: '/',
-  assetsInclude: ['**/*.glb'],
   build: {
     rollupOptions: {
       output: {
-        manualChunks: {
-          'react-vendor': ['react', 'react-dom'],
-          'react-router': ['react-router-dom'],
-          
+        manualChunks(id) {
+          if (!id.includes('node_modules')) return;
+
+          const norm = id.replace(/\\/g, '/');
+
+          if (norm.includes('/react-router-dom/')) return 'react-router';
+
+          if (norm.includes('/react-dom/') || norm.includes('/react/')) {
+            return 'react-vendor';
+          }
         },
       }
     }
