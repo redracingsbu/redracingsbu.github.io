@@ -4,13 +4,10 @@ import carPortrait from '../assets/home/carportrait.webp';
 import PageLayout from '../components/PageLayout.jsx';
 import missionPicture from '../assets/home/homepagetent.webp';
 import helmetImage from '../assets/home/helmet.webp';
-
 import { useScrollOpacity } from '../hooks/useScrollOpacity.js';
 
 function Home() {
   const missionRef = useRef(null);
-
-  // Scroll listener to calculate opacity based on scroll position
   const scrollOpacity = useScrollOpacity({ fadeDistanceRatio: 0.6 });
 
   const parallaxStyle = useMemo(() => ({
@@ -58,7 +55,6 @@ function Home() {
             className="flex flex-col items-center justify-center cursor-pointer transition-transform hover:scale-110 focus:outline-none"
             aria-label="Scroll down"
           >
-            {/* Double V Arrow */}
             <svg 
               className="w-10 h-10 text-white rr-home-arrow drop-shadow-lg" 
               fill="none" 
@@ -87,6 +83,7 @@ function Home() {
         <div className="flex items-start rr-page-pad pb-24">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-36 w-full max-w-[1400px] mx-auto">
             
+            {/* Left Column: Image */}
             <div className="max-w-3xl mx-auto lg:mx-0 lg:ml-12 w-full">
               <img 
                 src={missionPicture}
@@ -95,9 +92,9 @@ function Home() {
                 loading="lazy"
                 decoding="async"
               />
-
             </div>
 
+            {/* Right Column: Text Content */}
             <div className="max-w-3xl lg:mx-0 lg:mr-12 flex flex-col justify-center">
               <h1 className="rr-h1 mb-8">
                 Our Mission
@@ -125,44 +122,50 @@ function Home() {
       
       {/* About Section */}
       <div className="bg-black w-full mb-2 relative z-10">
-        <div className="flex-1 flex flex-col lg:flex-row">
+        <div className="flex items-start rr-page-pad pb-24"> {/* Added pb-24 to match above */}
           
-          <div className="rr-page-pad max-w-2xl 2xl:max-w-3xl lg:ml-12 p-6">
-            <h1 className="rr-h1 mb-12 text-left">
-              About Us
-            </h1>
+          {/* CHANGED: Replaced Flex with exact same Grid structure as Mission Section */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-36 w-full max-w-[1400px] mx-auto">
             
-            <div className="space-y-4 rr-body">
-              <p>
-                RedRacing is Stony Brook's First Formula SAE team, founded in 2025 in a dorm room by a group of new 
-                engineering students who shared a love for Formula 1 and high-performance vehicles.
-              </p>
+            {/* Text Column (Now matches Grid positioning) */}
+            {/* Removed lg:ml-12 because the grid gap/container handles spacing now */}
+            <div className="max-w-3xl mx-auto lg:mx-0 lg:ml-12 w-full flex flex-col justify-center order-1 lg:order-none">
+              <h1 className="rr-h1 mb-8 text-left">
+                About Us
+              </h1>
               
-              <p>
-                After joining the existing Baja SAE team, we realized two things: we wanted to pursue the technical 
-                challenge of a true formula-style car, and we wanted to build a team where students could learn 
-                hands-on from day one.
-              </p>
-              
-              <p>
-                What started as a few freshmen with an idea has evolved into a cross-disciplinary organization of 
-                over 30 mechanical, electrical, computer, software, physics, chemistry, and business students 
-                united around one goal: design, build, and compete with a Formula SAE vehicle on the international stage.
-              </p>
+              <div className="space-y-4 rr-body">
+                <p>
+                  RedRacing is Stony Brook's First Formula SAE team, founded in 2025 in a dorm room by a group of new 
+                  engineering students who shared a love for Formula 1 and high-performance vehicles.
+                </p>
+                
+                <p>
+                  After joining the existing Baja SAE team, we realized two things: we wanted to pursue the technical 
+                  challenge of a true formula-style car, and we wanted to build a team where students could learn 
+                  hands-on from day one.
+                </p>
+                
+                <p>
+                  What started as a few freshmen with an idea has evolved into a cross-disciplinary organization of 
+                  over 30 mechanical, electrical, computer, software, physics, chemistry, and business students 
+                  united around one goal: design, build, and compete with a Formula SAE vehicle on the international stage.
+                </p>
+              </div>
             </div>
+
+            {/* Image Column */}
+            <div className="max-w-3xl mx-auto lg:mx-0 lg:mr-12 w-full flex justify-center lg:justify-end order-2 lg:order-none lg:mt-24">
+              <img 
+                src={helmetImage} 
+                alt="Red Racing Helmet" 
+                className="w-full max-w-lg h-auto object-cover rounded-lg shadow-lg"
+                loading="lazy"
+                decoding="async"
+              />
+            </div>
+
           </div>
-
-          <div className="w-full lg:w-1/2 p-6 lg:pr-12 flex justify-center lg:mt-24">
-            <img 
-              src={helmetImage} 
-              alt="Red Racing Helmet" 
-              className="w-full max-w-lg h-auto object-cover rounded-lg shadow-lg"
-              loading="lazy"
-              decoding="async"
-            />
-
-          </div>
-
         </div>
       </div>
 
