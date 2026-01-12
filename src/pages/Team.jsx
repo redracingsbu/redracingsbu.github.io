@@ -31,7 +31,7 @@ const LEADERSHIP = [
   { name: "Owen Chen", role: "Secretary\nElectrical & Controls Lead", major: "Electrical Engineering", image: OwenChen },
   { name: "Vamsi Sri", role: "Treasurer", major: "Computer Engineering", image: VamsiSri },
   { name: "Syed Tahsin", role: "Powertrain Director", major: "Mechanical Engineering", image: SyedTahsin },
-  { name: "YukiLin", role: "Frame Lead", major: "Mechanical Engineering", image: YukiLin },
+  { name: "Yuki Lin", role: "Frame Lead", major: "Mechanical Engineering", image: YukiLin },
   { name: "Manhai Liu", role: "Suspension Lead", major: "Mechanical Engineering", image: ManhaiLiu },
   { name: "Muntaqa Chowdhury", role: "Corners Lead", major: "Mechanical Engineering", image: MuntaqaChowdhury },
   { name: "SM Rahman", role: "Business & Marketing Lead", major: "Information Sys, + Business and Econ", image: SMRaham },
