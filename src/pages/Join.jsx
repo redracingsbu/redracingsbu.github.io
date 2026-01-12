@@ -5,7 +5,7 @@ const scheduleItems = [
   { title: 'General Technical Meetings', loc: 'TBD', date: 'TBD', time: 'TBD' },
   { title: 'Structural/Chassis System Meetings', loc: 'TBD', date: 'TBD', time: 'TBD' },
   { title: 'Powertrain System Meetings', loc: 'TBD', date: 'TBD', time: 'TBD' },
-  { title: 'VIP Team Meetings', loc: 'TBD', date: 'TBD', time: 'TBD' },
+  { title: 'VIP Team Meetings', loc: 'Heavy Engr 201', date: 'Wednesdays', time: '5:00 - 5:55 PM' },
 ];
 
 // Data for Subsystems
