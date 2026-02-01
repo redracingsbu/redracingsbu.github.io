@@ -68,6 +68,11 @@ const sponsorTiers = [
           alt: 'Siemens Logo',
           className: 'w-80 lg:w-90 xl:w-120',
         },
+        {
+          src: AltiumLogo,
+          alt: 'Altium Logo',
+          className: 'h-12 lg:h-14 xl:h-16 w-auto max-w-xs lg:max-w-sm',
+        },
       ],
     ],
   },
@@ -92,11 +97,6 @@ const sponsorTiers = [
         {
           src: HumaneticsLogo,
           alt: 'Humanetics Logo',
-          className: 'h-12 lg:h-14 xl:h-16 w-auto max-w-xs lg:max-w-sm',
-        },
-        {
-          src: AltiumLogo,
-          alt: 'Altium Logo',
           className: 'h-12 lg:h-14 xl:h-16 w-auto max-w-xs lg:max-w-sm',
         },
         {
