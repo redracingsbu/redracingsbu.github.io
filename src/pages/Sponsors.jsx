@@ -8,6 +8,7 @@ import SiemensLogo from '../assets/sponsors/SiemensLogo.svg';
 import KISSsoftLogo from '../assets/sponsors/KISSsoftLogo.svg';
 import HumaneticsLogo from '../assets/sponsors/HumaneticsLogo.webp';
 import SensataLogo from '../assets/sponsors/SensataLogo.webp';
+import GeneHaasLogo from '../assets/sponsors/GeneHaasLogo.webp'
 import PageLayout from '../components/PageLayout.jsx';
 import { Link } from 'react-router-dom';
 
@@ -98,6 +99,11 @@ const sponsorTiers = [
           src: HumaneticsLogo,
           alt: 'Humanetics Logo',
           className: 'h-12 lg:h-14 xl:h-16 w-auto max-w-xs lg:max-w-sm',
+        },
+        {
+          src: GeneHaasLogo,
+          alt: 'Gene Haas Foundation Logo',
+          className: 'h-16 lg:h-24 xl:h-32',
         },
         {
           src: RapidharnessLogo,
