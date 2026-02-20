@@ -2,8 +2,7 @@ import PageLayout from '../components/PageLayout.jsx';
 
 // Data for Schedule
 const scheduleItems = [
-  { title: 'General Technical Meetings', loc: 'TBD', date: 'TBD', time: 'TBD' },
-  { title: 'Structural/Chassis System Meetings', loc: 'TBD', date: 'TBD', time: 'TBD' },
+  { title: 'Structural/Chassis System Meetings', loc: 'Heavy Engr 201', date: 'Fridays', time: '7:00pm' },
   { title: 'Powertrain System Meetings', loc: 'TBD', date: 'TBD', time: 'TBD' },
   { title: 'VIP Team Meetings', loc: 'Heavy Engr 201', date: 'Wednesdays', time: '5:00 - 5:55 PM' },
 ];
