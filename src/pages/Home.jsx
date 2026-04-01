@@ -141,7 +141,7 @@ function Home() {
                 </p>
                 
                 <p>
-                  After joining the existing Baja SAE team, we realized two things: we wanted to pursue the technical 
+                  As new college students, we didn't know much, but we knew two things for certain: we wanted to pursue the technical 
                   challenge of a true formula-style car, and we wanted to build a team where students could learn 
                   hands-on from day one.
                 </p>
