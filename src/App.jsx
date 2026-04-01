@@ -1,5 +1,5 @@
-import { lazy, Suspense } from 'react';
-import { Routes, Route, Navigate } from 'react-router-dom';
+import { lazy, Suspense, useEffect } from 'react';
+import { Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import ErrorBoundary from './components/ErrorBoundary.jsx';
 
 // Existing pages
@@ -9,6 +9,24 @@ const Sponsors = lazy(() => import('./pages/Sponsors.jsx'));
 const ContactUs = lazy(() => import('./pages/ContactUs.jsx'));
 const Team = lazy(() => import('./pages/Team.jsx'));
 const CarMeet = lazy(() => import('./pages/CarMeet.jsx'));
+
+/**
+ * Component to track page views in an SPA (React Router).
+ * Every time the location changes, we notify GoatCounter.
+ */
+function GoatCounterTracker() {
+  const location = useLocation();
+
+  useEffect(() => {
+    if (window.goatcounter && window.goatcounter.count) {
+      window.goatcounter.count({
+        path: location.pathname + location.search + location.hash,
+      });
+    }
+  }, [location]);
+
+  return null;
+}
 
 const PageLoader = () => (
   <div
@@ -24,6 +42,7 @@ const PageLoader = () => (
 function App() {
   return (
     <ErrorBoundary>
+      <GoatCounterTracker />
       <Suspense fallback={<PageLoader />}>
         <Routes>
           {/* Main Routes matching Header */}

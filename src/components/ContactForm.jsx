@@ -53,6 +53,15 @@ function ContactForm() {
         setTouched(Object.fromEntries(keys.map((key) => [key, true])));
 
         if (Object.keys(newErrors).length === 0) {
+            // Track form submission with GoatCounter
+            if (window.goatcounter && window.goatcounter.count) {
+                window.goatcounter.count({
+                    path: 'contact-submit',
+                    title: 'Contact Form Submitted',
+                    event: true,
+                });
+            }
+
             // Create mailto link
             const subject = encodeURIComponent(formData.topic);
             const body = encodeURIComponent(

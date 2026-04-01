@@ -84,6 +84,7 @@ function Join() {
               target="_blank"
               rel="noopener noreferrer"
               className="rr-btn-primary py-3 px-8 text-xl lg:text-2xl transition-all duration-200 transform hover:scale-105 shadow-lg"
+              data-goatcounter-click="join-discord"
             >
               Discord
             </a>

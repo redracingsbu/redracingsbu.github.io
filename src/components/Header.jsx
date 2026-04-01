@@ -90,6 +90,7 @@ const Header = memo(function Header() {
           className={getLinkClass(item.to)}
           onClick={handleNavClick}
           aria-current={location.pathname === item.to ? 'page' : undefined}
+          data-goatcounter-click={`nav-${item.label.toLowerCase().replace(/\\s+/g, '-')}`}
           {...mobileProps}
         >
           {item.label}
@@ -105,6 +106,7 @@ const Header = memo(function Header() {
         target="_blank"
         rel="noopener noreferrer"
         onClick={() => setMenuOpen(false)}
+        data-goatcounter-click={`ext-${item.label.toLowerCase().replace(/\\s+/g, '-')}`}
         {...mobileProps}
       >
         {item.label}

@@ -135,7 +135,7 @@ const sponsorTiers = [
 
 const renderCta = ({ key, type, to, href, label }) =>
   type === 'internal' ? (
-    <Link key={key} to={to} className={BUTTON_CLASS_NAME}>
+    <Link key={key} to={to} className={BUTTON_CLASS_NAME} data-goatcounter-click={`sponsor-cta-${key}`}>
       {label}
     </Link>
   ) : (
@@ -145,6 +145,7 @@ const renderCta = ({ key, type, to, href, label }) =>
       className={BUTTON_CLASS_NAME}
       target="_blank"
       rel="noopener noreferrer"
+      data-goatcounter-click={`sponsor-cta-${key}`}
     >
       {label}
     </a>

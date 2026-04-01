@@ -16,6 +16,7 @@ const Footer = memo(function Footer() {
                         rel="noopener noreferrer"
                         className="rr-social-link"
                         aria-label={alt}
+                        data-goatcounter-click={`social-${alt.toLowerCase()}`}
                     >
                         <img
                             src={icon}
@@ -28,7 +29,7 @@ const Footer = memo(function Footer() {
                 ))}
             </div>
             <div className="mb-2">
-                <a href={`mailto:${CONTACT_EMAIL}`} aria-label={`Email ${CONTACT_EMAIL}`}>
+                <a href={`mailto:${CONTACT_EMAIL}`} aria-label={`Email ${CONTACT_EMAIL}`} data-goatcounter-click="email-footer">
                     {CONTACT_EMAIL}
                 </a>
             </div>
