@@ -1,4 +1,4 @@
-import{r,c as Q,j as a}from"./react-vendor-05lNOt2L.js";import{u as a0,L as W}from"./react-router-De8y_aLk.js";const s0="/assets/redracing-DnQfwAux.svg",G=[{to:"/",label:"Home"},{to:"/team",label:"Team"},{to:"/join",label:"Join"},{to:"/carmeet",label:"Car Meet"},{to:"/sponsors",label:"Sponsors"},{to:"/contact",label:"Contact Us"},{href:"https://www.gofundme.com/f/5nhhy-support-stony-brook-redracing-formula-sae",label:"Donate"}],X=`
+import{r,c as Q,j as a}from"./react-vendor-vQVD7K-I.js";import{u as a0,L as W}from"./react-router-BCg3XWqD.js";const s0="/assets/redracing-DnQfwAux.svg",G=[{to:"/",label:"Home"},{to:"/team",label:"Team"},{to:"/join",label:"Join"},{to:"/carmeet",label:"Car Meet"},{to:"/sponsors",label:"Sponsors"},{to:"/contact",label:"Contact Us"},{href:"https://www.gofundme.com/f/5nhhy-support-stony-brook-redracing-formula-sae",label:"Donate"}],X=`
   relative font-semibold text-lg transition-all duration-300 whitespace-nowrap z-40
   active:scale-95 active:text-white
   after:content-[''] after:block after:absolute after:w-full after:h-0.5 after:bg-white
