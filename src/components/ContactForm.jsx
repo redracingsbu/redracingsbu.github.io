@@ -1,5 +1,6 @@
 import { useCallback, useState } from 'react';
 import { CONTACT_EMAIL } from '../utils/socialLinks.js';
+import { trackEvent } from '../utils/analytics.js';
 
 function getRequiredError(value) {
     if (!value || value.trim() === '') return 'This field is required';
@@ -54,13 +55,7 @@ function ContactForm() {
 
         if (Object.keys(newErrors).length === 0) {
             // Track form submission with GoatCounter
-            if (window.goatcounter && window.goatcounter.count) {
-                window.goatcounter.count({
-                    path: 'contact-submit',
-                    title: 'Contact Form Submitted',
-                    event: true,
-                });
-            }
+            trackEvent('contact-submit', 'Contact Form Submitted');
 
             // Create mailto link
             const subject = encodeURIComponent(formData.topic);

@@ -1,6 +1,7 @@
 import { lazy, Suspense, useEffect } from 'react';
 import { Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import ErrorBoundary from './components/ErrorBoundary.jsx';
+import { trackPageview } from './utils/analytics.js';
 
 // Existing pages
 const Home = lazy(() => import('./pages/Home.jsx'));
@@ -18,11 +19,7 @@ function GoatCounterTracker() {
   const location = useLocation();
 
   useEffect(() => {
-    if (window.goatcounter && window.goatcounter.count) {
-      window.goatcounter.count({
-        path: location.pathname + location.search + location.hash,
-      });
-    }
+    trackPageview(location.pathname + location.search + location.hash);
   }, [location]);
 
   return null;

@@ -1,5 +1,6 @@
 import { memo } from 'react';
 import { CONTACT_EMAIL, SOCIAL_LINKS } from '../utils/socialLinks.js';
+import { trackEvent } from '../utils/analytics.js';
 
 const Footer = memo(function Footer() {
     return (
@@ -16,7 +17,7 @@ const Footer = memo(function Footer() {
                         rel="noopener noreferrer"
                         className="rr-social-link"
                         aria-label={alt}
-                        data-goatcounter-click={`social-${alt.toLowerCase()}`}
+                        onClick={() => trackEvent(`social-${alt.toLowerCase()}`, `Social Link: ${alt}`)}
                     >
                         <img
                             src={icon}
@@ -29,7 +30,7 @@ const Footer = memo(function Footer() {
                 ))}
             </div>
             <div className="mb-2">
-                <a href={`mailto:${CONTACT_EMAIL}`} aria-label={`Email ${CONTACT_EMAIL}`} data-goatcounter-click="email-footer">
+                <a href={`mailto:${CONTACT_EMAIL}`} aria-label={`Email ${CONTACT_EMAIL}`} onClick={() => trackEvent('email-footer', 'Email Footer Link')}>
                     {CONTACT_EMAIL}
                 </a>
             </div>

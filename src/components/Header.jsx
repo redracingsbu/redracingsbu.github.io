@@ -1,6 +1,7 @@
 import { memo, useCallback, useRef, useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import logoIcon from '../assets/header/redracing.svg';
+import { trackEvent } from '../utils/analytics.js';
 
 const NAV_ITEMS = [
   { to: '/', label: 'Home' },
@@ -88,9 +89,11 @@ const Header = memo(function Header() {
           key={item.label}
           to={item.to}
           className={getLinkClass(item.to)}
-          onClick={handleNavClick}
+          onClick={() => {
+            handleNavClick();
+            trackEvent(`nav-${item.label.toLowerCase().replace(/\s+/g, '-')}`, `Nav: ${item.label}`);
+          }}
           aria-current={location.pathname === item.to ? 'page' : undefined}
-          data-goatcounter-click={`nav-${item.label.toLowerCase().replace(/\\s+/g, '-')}`}
           {...mobileProps}
         >
           {item.label}
@@ -105,8 +108,10 @@ const Header = memo(function Header() {
         className={getLinkClass(item.href)}
         target="_blank"
         rel="noopener noreferrer"
-        onClick={() => setMenuOpen(false)}
-        data-goatcounter-click={`ext-${item.label.toLowerCase().replace(/\\s+/g, '-')}`}
+        onClick={() => {
+          setMenuOpen(false);
+          trackEvent(`ext-${item.label.toLowerCase().replace(/\s+/g, '-')}`, `External: ${item.label}`);
+        }}
         {...mobileProps}
       >
         {item.label}
