@@ -26,7 +26,7 @@ const LEADERSHIP = [
   { name: "Dele Lin", role: "Ergonomics Lead", major: "Mechanical Engineering", image: DeleLin },
   { name: "Anthony Alters", role: "Drivetrain Lead", major: "Mechanical Engineering", image: AnthonyAlters },
   { name: "Kazi Abthahi", role: "Drivetrain Lead", major: "Mechanical Engineering", image: KaziAbthahi },
-  { name: "Mathew Roshan", role: "Cooling & Fuel Lead", major: "Chemical Engineering", image: MathewRoshan },
+  { name: "Mathew Roshan", role: "Fuel Lead", major: "Chemical Engineering", image: MathewRoshan },
   { name: "Anton Yanaky", role: "Software Lead", major: "Computer Science", image: AntonYanaky },
   { name: "Owen Chen", role: "Secretary\nElectrical & Controls Lead", major: "Electrical Engineering", image: OwenChen },
   { name: "Vamsi Sri", role: "Treasurer", major: "Computer Engineering", image: VamsiSri },
@@ -34,6 +34,7 @@ const LEADERSHIP = [
   { name: "Yuki Lin", role: "Frame Lead", major: "Mechanical Engineering", image: YukiLin },
   { name: "Manhai Liu", role: "Suspension Lead", major: "Mechanical Engineering", image: ManhaiLiu },
   { name: "Muntaqa Chowdhury", role: "Corners Lead", major: "Mechanical Engineering", image: MuntaqaChowdhury },
+  { name: "Angelina Ramos", role: "Cooling Lead", major: "Mechanical Engineering", image: AngelinaRamos}
   { name: "SM Rahman", role: "Business & Marketing Lead", major: "Information Sys, + Business and Econ", image: SMRaham },
   { name: "Rayyan Nashrid", role: "Historian", major: "Mechanical Engineering", image: RayhanNasir }
 ];
