@@ -15,6 +15,7 @@ import ManhaiLiu from '../assets/team/ManhaiLiu.webp';
 import MuntaqaChowdhury from '../assets/team/MuntaqaChowdhury.webp';
 import SMRaham from '../assets/team/SMRaham.webp';
 import RayhanNasir from '../assets/team/RayhanNasir.webp';
+import AngelinaRamos from '../assets/team/AngelinaRamos.webp';
 
 const TEAM_LEADS = [
   { name: "Ivan Yu", role: "President\nCo-Chassis Director", major: "Mechanical Engineering", image: IvanYu },
