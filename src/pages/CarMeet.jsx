@@ -125,7 +125,7 @@ function CarMeet() {
               rel="noopener noreferrer"
               className="text-inherit decoration-inherit visited:text-gray-700"
               >
-                Sac Parking Lot Apr 26 2-4 PM
+                Sac Parking Lot, Apr 26, 2-4 PM
             </a>
           </span>
         </h2>      
