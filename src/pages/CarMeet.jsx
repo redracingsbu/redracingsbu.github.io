@@ -4,6 +4,7 @@ import CarMeetMain from '../assets/carmeet/2025CarMeetMain.webp';
 import FirstPlaceImg from '../assets/carmeet/550i.webp';
 import SecondPlaceImg from '../assets/carmeet/KamuriiCamry.webp';
 import ThirdPlaceImg from '../assets/carmeet/datsun200sx.webp';
+import spr26qr from '../assets/carmeet/spr26qr.webp';
 
 const MEET_WINNERS = [
   { 
@@ -106,7 +107,7 @@ function CarMeet() {
         </div>
       </div>
 
-      <div className="bg-black text-white w-full py-8 px-6 flex flex-col items-center text-center space-y-12">
+      <div className="bg-black text-white w-full py-8 pb-2 px-6 flex flex-col items-center text-center space-y-12">
         <p className="max-w-6xl text-lg lg:text-xl leading-relaxed text-white">
           We host an on-campus car meet every semester as a way for students, local car enthusiasts, 
           and other colleges to connect through our shared love for cars. If you have a cool ride 
@@ -114,8 +115,25 @@ function CarMeet() {
           feel free to stop by!
         </p>
         <h2 className="text-2xl lg:text-3xl font-bold">
-          Spring Meet Location & Date: <span className="underline decoration-2 underline-offset-4">TBD</span>
-        </h2>
+          Spring Meet Location & Date:
+        </h2>  
+        <h2 className="text-2xl lg:text-3xl font-bold">
+          <span className="underline decoration-2 underline-offset-4">
+            <a
+              href="https://docs.google.com/forms/d/e/1FAIpQLSc7swC40URWQ5q9iLP1Ny5fF6bK4LZRLDLA7GE384cg4ZWjZA/viewform"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-inherit decoration-inherit visited:text-gray-700"
+              >
+                Sac Parking Lot Apr 26 2-4 PM
+            </a>
+          </span>
+        </h2>      
+        <img 
+          src={spr26qr} 
+          alt="Spring 2026 Meet QR Code" 
+          className="w-1/4 object-contain" 
+        />
       </div>
 
       <div className="bg-black text-white w-full pb-16 px-6 flex flex-col items-center">
