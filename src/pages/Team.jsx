@@ -17,27 +17,35 @@ import SMRaham from '../assets/team/SMRaham.webp';
 import RayhanNasir from '../assets/team/RayhanNasir.webp';
 import AngelinaRamos from '../assets/team/AngelinaRamos.webp';
 
+const placeholderImage = SyedTahsin;
+
 const TEAM_LEADS = [
   { name: "Ivan Yu", role: "President\nCo-Chassis Director", major: "Mechanical Engineering", image: IvanYu },
   { name: "Daniel Zou", role: "Vice President\nCo-Chassis Director", major: "Mechanical Engineering", image: DanielZou }
 ];
 
 const LEADERSHIP = [
-  { name: "Preston Yeung", role: "Aerodynamics Lead", major: "Mechanical Engineering", image: PrestonYeung },
-  { name: "Dele Lin", role: "Ergonomics Lead", major: "Mechanical Engineering", image: DeleLin },
-  { name: "Anthony Alters", role: "Drivetrain Lead", major: "Mechanical Engineering", image: AnthonyAlters },
-  { name: "Kazi Abthahi", role: "Drivetrain Lead", major: "Mechanical Engineering", image: KaziAbthahi },
-  { name: "Mathew Roshan", role: "Fuel Lead", major: "Chemical Engineering", image: MathewRoshan },
-  { name: "Anton Yanaky", role: "Software Lead", major: "Computer Science", image: AntonYanaky },
-  { name: "Owen Chen", role: "Secretary\nElectrical & Controls Lead", major: "Electrical Engineering", image: OwenChen },
+  { name: "Preston Yeung", role: "Secretary &\nAerodynamics Lead", major: "Mechanical Engineering", image: PrestonYeung },
   { name: "Vamsi Sri", role: "Treasurer", major: "Computer Engineering", image: VamsiSri },
-  { name: "Syed Tahsin", role: "Powertrain Director", major: "Mechanical Engineering", image: SyedTahsin },
-  { name: "Yuki Lin", role: "Frame Lead", major: "Mechanical Engineering", image: YukiLin },
+  { name: "Anthony Alters", role: "Powertrain Director", major: "Mechanical Engineering", image: AnthonyAlters },
+  { name: "Yuki Lin", role: "Chassis / VD Director", major: "Mechanical Engineering", image: YukiLin },
+  { name: "Dele Lin", role: "Frame Lead", major: "Mechanical Engineering", image: DeleLin },
   { name: "Manhai Liu", role: "Suspension Lead", major: "Mechanical Engineering", image: ManhaiLiu },
+  { name: "Lawrence Chan", role: "Corners Lead", major: "Mechanical Engineering", image: placeholderImage },
+  { name: "Aaron Coyne", role: "Steering Lead", major: "Mechanical Engineering", image: placeholderImage },
+  { name: "David De La Lera", role: "Ergonomics Lead", major: "Mechanical Engineering", image: placeholderImage },
+  { name: "Justin Semet", role: "Composites Lead", major: "Mechanical Engineering", image: placeholderImage },
+  { name: "Syed Tahsin", role: "Engine Lead", major: "Mechanical Engineering", image: SyedTahsin },
+  { name: "Kazi Abthahi", role: "Drivetrain Lead", major: "Mechanical Engineering", image: KaziAbthahi },
+  { name: "Mathew Roshan", role: "Fuel & Oil Lead", major: "Chemical Engineering", image: MathewRoshan },
+  { name: "Anni Ni", role: "Cooling Lead", major: "Mechanical Engineering", image: placeholderImage },
+  { name: "Owen Chen", role: "Electrical Lead", major: "Electrical Engineering", image: OwenChen },
+  { name: "SM Rahman", role: "Business & Marketing Lead", major: "Information Systems +\nBusiness & Econ", image: SMRaham },
+  { name: "Anton Yanaky", role: "Software Lead", major: "Computer Science", image: AntonYanaky },
+  { name: "Erin Kim", role: "Graphic Designer", major: "Mechanical Engineering", image: placeholderImage },
   { name: "Muntaqa Chowdhury", role: "Corners Lead", major: "Mechanical Engineering", image: MuntaqaChowdhury },
-  { name: "Angelina Ramos", role: "Cooling Lead", major: "Mechanical Engineering", image: AngelinaRamos},
-  { name: "SM Rahman", role: "Business & Marketing Lead", major: "Information Sys, + Business and Econ", image: SMRaham },
-  { name: "Rayyan Nashrid", role: "Historian", major: "Mechanical Engineering", image: RayhanNasir }
+  { name: "Angelina Ramos", role: "Cooling Lead", major: "Mechanical Engineering", image: AngelinaRamos },
+  { name: "Rayyan Nashrid", role: "Historian", major: "Mechanical Engineering", image: RayhanNasir },
 ];
 
 const MemberCard = ({ member }) => (
@@ -68,7 +76,7 @@ const MemberCard = ({ member }) => (
         {member.role}
       </p>
       {member.major && (
-        <p className="text-red-500 italic tracking-wide">
+        <p className="text-red-500 italic tracking-wide whitespace-pre-line">
           {member.major}
         </p>
       )}
@@ -80,7 +88,6 @@ function Team() {
   return (
     <PageLayout wrapperClassName="rr-page">
       <div className="flex flex-col items-center w-full max-w-[1400px] mx-auto px-6 py-12 lg:py-24 space-y-24">
-        
         <section className="w-full flex flex-col items-center space-y-16">
           <h1 className="rr-h1 text-center">Team Leads</h1>
           <div className="flex flex-wrap justify-center gap-16 lg:gap-32 w-full max-w-5xl">
@@ -97,7 +104,6 @@ function Team() {
             ))}
           </div>
         </section>
-
       </div>
     </PageLayout>
   );
