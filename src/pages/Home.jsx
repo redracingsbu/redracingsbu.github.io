@@ -113,7 +113,15 @@ function Home() {
             <div className="max-w-3xl lg:mx-0 lg:mr-12 flex flex-col justify-center">
               <h1 className="rr-h1 mb-8">Our Mission</h1>
 
-              <div className="space-y-6 rr-body"></div>
+              <div className="space-y-6 rr-body">
+                <p>
+                  RedRacing at Stony Brook University aims to prepare
+                  undergraduate and graduate students with an opportunity to
+                  engage in a range of engineering disciplines, challenging them
+                  through real-world applications in the field of automotive
+                  design.
+                </p>
+              </div>
             </div>
           </div>
         </div>

@@ -8,11 +8,12 @@ const PageLayout = memo(function PageLayout({
   mainClassName = 'flex-1',
   mainProps = {},
   beforeMain,
+  headerProps = {},
   footerWrapperClassName,
 }) {
   return (
     <div className={wrapperClassName}>
-      <Header />
+      <Header {...headerProps} />
       {beforeMain}
       <main className={mainClassName} {...mainProps}>
         {children}

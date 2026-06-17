@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Archivo+Black&display=swap');
 @import "tailwindcss";
 
 @layer base {
@@ -59,15 +60,43 @@
 
   .rr-body-muted { @apply text-lg lg:text-xl text-gray-200 leading-relaxed; }
 
+  .rr-archivo-black {
+    font-family: "Archivo Black", "Arial Black", Arial, sans-serif;
+    letter-spacing: 0;
+  }
+
+  .rr-reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 700ms ease-out, transform 700ms ease-out;
+  }
+
+  .rr-reveal-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .rr-reveal {
+      opacity: 1;
+      transform: none;
+      transition: none;
+    }
+  }
+
   .rr-footer { font-family: "Courier New", Courier, monospace; }
 
   .rr-header-logo-img {
-    filter: brightness(0) saturate(100%) invert(17%) sepia(95%) saturate(7538%) hue-rotate(4deg)
-      brightness(89%) contrast(119%);
-    transition: filter 300ms ease-in-out;
+    display: block;
+    backface-visibility: hidden;
   }
 
-  .rr-header-logo:hover .rr-header-logo-img {
+  .rr-header-logo-img-red {
+    filter: brightness(0) saturate(100%) invert(17%) sepia(95%) saturate(7538%) hue-rotate(4deg)
+      brightness(89%) contrast(119%);
+  }
+
+  .rr-header-logo-img-white {
     filter: invert(1) brightness(2);
   }
 

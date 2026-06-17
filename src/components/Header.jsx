@@ -8,6 +8,7 @@ const NAV_ITEMS = [
   { to: '/team', label: 'Team' },
   { to: '/join', label: 'Join' },
   { to: '/carmeet', label: 'Car Meet' },
+  { to: '/michigan', label: 'Michigan' },
   { to: '/sponsors', label: 'Sponsors' },
   { to: '/contact', label: 'Contact Us' },
   {
@@ -17,20 +18,50 @@ const NAV_ITEMS = [
 ];
 
 const LINK_BASE_CLASS = `
-  relative font-semibold text-lg transition-all duration-300 whitespace-nowrap z-40
+  relative font-semibold text-lg lg:text-base 2xl:text-lg transition-all duration-300 whitespace-nowrap z-40
   active:scale-95 active:text-white
   after:content-[''] after:block after:absolute after:w-full after:h-0.5 after:bg-white
   after:transition-transform after:duration-300 after:bottom-[-6px] after:left-0
 `;
 
-const Header = memo(function Header() {
+const Header = memo(function Header({ variant = 'solid', overlayFadeAfterId }) {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [overlayPastFadePoint, setOverlayPastFadePoint] = useState(false);
   const location = useLocation();
   const menuButtonRef = useRef(null);
   const firstMobileLinkRef = useRef(null);
   const wasMenuOpenRef = useRef(false);
+  const isOverlay = variant === 'overlay';
 
   useEffect(() => setMenuOpen(false), [location.pathname]);
+
+  useEffect(() => {
+    if (!isOverlay || !overlayFadeAfterId) {
+      setOverlayPastFadePoint(false);
+      return undefined;
+    }
+
+    const updateOverlay = () => {
+      const fadeElement = document.getElementById(overlayFadeAfterId);
+      if (!fadeElement) {
+        setOverlayPastFadePoint(false);
+        return;
+      }
+
+      const fadePoint =
+        fadeElement.getBoundingClientRect().bottom + window.scrollY;
+      setOverlayPastFadePoint(window.scrollY >= fadePoint - 1);
+    };
+
+    updateOverlay();
+    window.addEventListener('scroll', updateOverlay, { passive: true });
+    window.addEventListener('resize', updateOverlay);
+
+    return () => {
+      window.removeEventListener('scroll', updateOverlay);
+      window.removeEventListener('resize', updateOverlay);
+    };
+  }, [isOverlay, overlayFadeAfterId]);
 
   useEffect(() => {
     document.body.style.overflow = menuOpen ? 'hidden' : 'unset';
@@ -121,20 +152,35 @@ const Header = memo(function Header() {
 
   return (
     <>
-      <header className="sticky top-0 left-0 w-full z-[100] bg-black py-3 lg:py-1">
+      <header
+        className={`${
+          isOverlay
+            ? overlayPastFadePoint || menuOpen
+              ? 'fixed bg-black/45 backdrop-blur-sm'
+              : 'fixed bg-transparent'
+            : 'sticky bg-black'
+        } top-0 left-0 w-full z-[100] py-3 lg:py-1 transition-colors duration-300`}
+      >
         <div className="flex items-center justify-between w-full px-6 lg:px-12 lg:py-4">
           
           {/* Logo Section */}
           <Link
             to="/"
             onClick={handleLogoClick}
-            className="rr-header-logo flex-shrink-0 text-4xl tracking-wide relative group transition-transform duration-300 lg:hover:-translate-y-0.5 z-40"
+            className="rr-header-logo flex-shrink-0 text-4xl tracking-wide relative group z-40"
           >
             <img
               src={logoIcon}
               alt="Red Racing Logo"
               decoding="async"
-              className="rr-header-logo-img h-[18px] lg:h-6 transition-all duration-300 ease-in-out"
+              className="rr-header-logo-img rr-header-logo-img-red h-[18px] lg:h-6"
+            />
+            <img
+              src={logoIcon}
+              alt=""
+              aria-hidden="true"
+              decoding="async"
+              className="rr-header-logo-img rr-header-logo-img-white absolute inset-0 h-[18px] lg:h-6 opacity-0 transition-opacity duration-200 ease-out group-hover:opacity-100"
             />
             
             <div className="absolute -top-2 left-0 w-0 h-0.5 bg-white lg:group-hover:w-1/4 transition-all duration-300"></div>
@@ -142,7 +188,7 @@ const Header = memo(function Header() {
           </Link>
 
           {/* Desktop Navigation */}
-          <nav className="hidden lg:flex flex-1 justify-end gap-11 items-center ml-10 z-40 relative">
+          <nav className="hidden lg:flex flex-1 justify-end gap-5 2xl:gap-11 items-center ml-10 z-40 relative">
             {NAV_ITEMS.map((item, index) => renderNavItem(item, index, { isMobile: false }))}
           </nav>
 

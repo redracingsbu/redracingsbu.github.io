@@ -9,6 +9,7 @@ import KISSsoftLogo from '../assets/sponsors/KISSsoftLogo.svg';
 import HumaneticsLogo from '../assets/sponsors/HumaneticsLogo.webp';
 import SensataLogo from '../assets/sponsors/SensataLogo.webp';
 import GeneHaasLogo from '../assets/sponsors/GeneHaasLogo.webp'
+import HexagonLogo from '../assets/sponsors/HexagonLogo.svg';
 import PageLayout from '../components/PageLayout.jsx';
 import { Link } from 'react-router-dom';
 
@@ -122,6 +123,11 @@ const sponsorTiers = [
           src: SensataLogo,
           alt: 'Sensata Logo',
           className: 'h-20 lg:h-30 xl:h-40 w-auto max-w-xs lg:max-w-sm',
+        },
+        {
+          src: HexagonLogo,
+          alt: 'Hexagon Logo',
+          className: 'h-16 lg:h-20 xl:h-28 w-auto max-w-xs lg:max-w-sm',
         },
         {
           src: AceControlsLogo,

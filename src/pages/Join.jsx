@@ -2,9 +2,9 @@ import PageLayout from '../components/PageLayout.jsx';
 
 // Data for Schedule
 const scheduleItems = [
-  { title: 'Structural/Chassis System Meetings', loc: 'Heavy Engr 201', date: 'Fridays', time: '7:00pm - 8:00pm' },
+  { title: 'Structural/Chassis System Meetings', loc: 'TBD', date: 'TBD', time: 'TBD' },
   { title: 'Powertrain System Meetings', loc: 'TBD', date: 'TBD', time: 'TBD' },
-  { title: 'VIP Team Meetings', loc: 'Heavy Engr 201', date: 'Wednesdays', time: '5:00 - 5:55 PM' },
+  { title: 'VIP Team Meetings', loc: 'TBD', date: 'TBD', time: 'TBD' },
 ];
 
 // Data for Subsystems
@@ -92,11 +92,11 @@ function Join() {
         </div>
       </div>
 
-      {/* SECTION 2: Spring 2025 Schedule */}
+      {/* SECTION 2: Fall 2026 Schedule */}
       {/* Used a separate container with solid background for readability over complex bg */}
       <div className="w-full py-30 px-6 lg:px-12 mt-36 2xl:mt-64">
         <h2 className="rr-h2-section">
-          Spring 2025 Schedule
+          Fall 2026 Schedule
         </h2>
         
         <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-1 lg:grid-cols-3 gap-6">

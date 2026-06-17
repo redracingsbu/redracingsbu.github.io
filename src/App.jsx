@@ -10,6 +10,7 @@ const Sponsors = lazy(() => import('./pages/Sponsors.jsx'));
 const ContactUs = lazy(() => import('./pages/ContactUs.jsx'));
 const Team = lazy(() => import('./pages/Team.jsx'));
 const CarMeet = lazy(() => import('./pages/CarMeet.jsx'));
+const Michigan = lazy(() => import('./pages/Michigan.jsx'));
 
 /**
  * Component to track page views in an SPA (React Router).
@@ -47,6 +48,7 @@ function App() {
           <Route path="/team" element={<Team />} />
           <Route path="/join" element={<Join />} />
           <Route path="/carmeet" element={<CarMeet />} />
+          <Route path="/michigan" element={<Michigan />} />
           <Route path="/sponsors" element={<Sponsors />} />
           <Route path="/contact" element={<ContactUs />} />
           
