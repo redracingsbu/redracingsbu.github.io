@@ -12,10 +12,7 @@ import VamsiSri from '../assets/team/VamsiSri.webp';
 import SyedTahsin from '../assets/team/SyedTahsin.webp';
 import YukiLin from '../assets/team/YukiLin.webp';
 import ManhaiLiu from '../assets/team/ManhaiLiu.webp';
-import MuntaqaChowdhury from '../assets/team/MuntaqaChowdhury.webp';
 import SMRaham from '../assets/team/SMRaham.webp';
-import RayhanNasir from '../assets/team/RayhanNasir.webp';
-import AngelinaRamos from '../assets/team/AngelinaRamos.webp';
 
 const placeholderImage = SyedTahsin;
 
@@ -43,9 +40,6 @@ const LEADERSHIP = [
   { name: "SM Rahman", role: "Business & Marketing Lead", major: "Information Systems +\nBusiness & Econ", image: SMRaham },
   { name: "Anton Yanaky", role: "Software Lead", major: "Computer Science", image: AntonYanaky },
   { name: "Erin Kim", role: "Graphic Designer", major: "Mechanical Engineering", image: placeholderImage },
-  { name: "Muntaqa Chowdhury", role: "Corners Lead", major: "Mechanical Engineering", image: MuntaqaChowdhury },
-  { name: "Angelina Ramos", role: "Cooling Lead", major: "Mechanical Engineering", image: AngelinaRamos },
-  { name: "Rayyan Nashrid", role: "Historian", major: "Mechanical Engineering", image: RayhanNasir },
 ];
 
 const MemberCard = ({ member }) => (

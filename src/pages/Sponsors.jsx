@@ -112,6 +112,13 @@ const sponsorTiers = [
           className: 'h-12 lg:h-16 xl:h-20',
         },
       ],
+      [
+        {
+          src: HexagonLogo,
+          alt: 'Hexagon Logo',
+          className: 'h-16 lg:h-20 xl:h-28 w-auto max-w-xs lg:max-w-sm',
+        },
+      ],
     ],
   },
   {
@@ -123,11 +130,6 @@ const sponsorTiers = [
           src: SensataLogo,
           alt: 'Sensata Logo',
           className: 'h-20 lg:h-30 xl:h-40 w-auto max-w-xs lg:max-w-sm',
-        },
-        {
-          src: HexagonLogo,
-          alt: 'Hexagon Logo',
-          className: 'h-16 lg:h-20 xl:h-28 w-auto max-w-xs lg:max-w-sm',
         },
         {
           src: AceControlsLogo,
