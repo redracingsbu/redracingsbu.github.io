@@ -17,8 +17,8 @@ import SMRaham from '../assets/team/SMRaham.webp';
 const placeholderImage = SyedTahsin;
 
 const TEAM_LEADS = [
-  { name: "Ivan Yu", role: "President\nCo-Chassis Director", major: "Mechanical Engineering", image: IvanYu },
-  { name: "Daniel Zou", role: "Vice President\nCo-Chassis Director", major: "Mechanical Engineering", image: DanielZou }
+  { name: "Ivan Yu", role: "President", major: "Mechanical Engineering", image: IvanYu },
+  { name: "Daniel Zou", role: "Vice President", major: "Mechanical Engineering", image: DanielZou }
 ];
 
 const LEADERSHIP = [
