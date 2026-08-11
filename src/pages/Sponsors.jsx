@@ -24,7 +24,7 @@ const sponsorCtas = [
   {
     key: 'brochure',
     type: 'external',
-    href: 'https://drive.google.com/file/d/1CzhU9inERFuv8213MBwJBIHz5_ktmapx/view',
+    href: '/sponsor-brochure.pdf',
     label: 'Sponsor Brochure',
   },
   {
