@@ -98,11 +98,11 @@ function Join() {
           Fall 2026 Schedule
         </h2>
         
-        <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-1 lg:grid-cols-3 gap-6">
+        <div className="max-w-6xl lg:max-w-[760px] mx-auto grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 gap-6">
           {scheduleItems.map((item, index) => (
             <div 
               key={index} 
-              className={`bg-[#C02820] p-8 flex flex-col items-center justify-center text-center min-h-[280px] hover:bg-[#D13028] transition-colors duration-300 ${index === 1 ? 'lg:col-start-3' : ''}`}
+              className="bg-[#C02820] p-8 flex flex-col items-center justify-center text-center min-h-[280px] hover:bg-[#D13028] transition-colors duration-300"
             >
               <h3 className="text-white font-bold text-xl lg:text-2xl mb-8 leading-tight">
                 {item.title}
