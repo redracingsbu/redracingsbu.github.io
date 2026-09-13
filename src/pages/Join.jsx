@@ -2,9 +2,8 @@ import PageLayout from '../components/PageLayout.jsx';
 
 // Data for Schedule
 const scheduleItems = [
-  { title: 'Structural/Chassis System Meetings', loc: 'TBD', date: 'TBD', time: 'TBD' },
-  { title: 'Powertrain System Meetings', loc: 'TBD', date: 'TBD', time: 'TBD' },
-  { title: 'VIP Team Meetings', loc: 'TBD', date: 'TBD', time: 'TBD' },
+  { title: 'Weekly Team Meeting', loc: 'Light Engineering 102', date: 'Thursdays', time: '6:30 - 7:30 pm' },
+  { title: 'Manufacturing Shop Times', loc: 'TBD', date: 'TBD', time: 'TBD' },
 ];
 
 // Data for Subsystems
