@@ -72,6 +72,11 @@ const sponsorTiers = [
           className: 'w-80 lg:w-90 xl:w-120',
         },
         {
+          src: GeneHaasLogo,
+          alt: 'Gene Haas Foundation Logo',
+          className: 'h-26 lg:h-40 xl:h-52',
+        },
+        {
           src: AltiumLogo,
           alt: 'Altium Logo',
           className: 'h-12 lg:h-14 xl:h-16 w-auto max-w-xs lg:max-w-sm',
@@ -101,11 +106,6 @@ const sponsorTiers = [
           src: HumaneticsLogo,
           alt: 'Humanetics Logo',
           className: 'h-12 lg:h-14 xl:h-16 w-auto max-w-xs lg:max-w-sm',
-        },
-        {
-          src: GeneHaasLogo,
-          alt: 'Gene Haas Foundation Logo',
-          className: 'h-16 lg:h-24 xl:h-32',
         },
         {
           src: RapidharnessLogo,
